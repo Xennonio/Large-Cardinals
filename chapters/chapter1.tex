@@ -1,0 +1,258 @@
+\chapter{``Small'' Large Cardinals}
+
+There are a lot of ways to motivate the study of Large Cardinals, and we will do it while progressively presenting them, but you can see a great one in my \href{https://github.com/Xennonio/Cofinality}{Cofinality} notes. There I explain how we can come up naturally with the concept of a weakly inaccessible cardinal, and showed some properties of it. Before remembering some of them, let's see a toy model example of what we mean by a Large Cardinal Axiom.
+
+As we will see, Large Cardinals are so large that their existence can't be proved in ZFC alone. But what if I told you we already have\footnote{with a lot of poetic license} some kind of large cardinal axiom in ZFC?
+
+Imagine yourself as an ultrafinitist, you don't believe in such things as infinite cardinals, but this doesn't stop you from believing that Set Theory is important. In fact you use set theory a lot! But just as a branch of combinatorics, where everything is purely hereditarily finite.
+
+Hence, the Axiom of Replacement is pointless since, I mean, when does anyone used that? And what can we say about the Axiom of Infinity, other than that it's utter bullshit. So you work in a weaker theory, which we will call FST (short for Finite Set Theory).
+
+As we know, $R(\omega)=V_\omega\vDash\mathrm{FST}$, and $\omega\notin V_\omega$, so $\mathrm{FST}$ can't prove there are such things as infinite cardinals. Even more, we have that the existence of such cardinal implies the consistency of FST! So we could say the Axiom of Infinity is some kind of Large Cardinal Axiom, but for ultrafinitist. We will keep this analogy when talking about consistency hierarchy later, so you don't need to keep thinking like an ultrafinitist until there\footnote{fortunetaly, otherwise you wouldn't get past the first page}.
+
+\section{Inaccessible Cardinals}
+
+\subsection{Fixed Point Lemma for Normal Functions}
+
+As we saw, a weakly inaccessible cardinal $\kappa$ is just a uncountable limit regular cardinal. One of its properties is that it's an aleph fixed point, meaning $\aleph_\kappa=\kappa$. However, in my cofinality notes I proved being an aleph fixed point is not too strong, since we can prove there are arbitrarily large aleph fixed points. As promised, I will show here a more general result.
+
+\begin{definition}{Normal Function}{normal_function}
+    A class-function $F:\text{Ord}\to\text{Ord}$ is called \lasereye{normal} if it's both:
+    \begin{itemize}
+        \item monotone increasing, i.e., $\alpha<\beta\Rightarrow F(\alpha)<F(\beta)$;
+        \item continuous in the order topology, i.e., if $\lambda>0$ is a limit ordinal, then $F(\lambda)=\bigcup_{\alpha<\lambda}F(\alpha)$.
+    \end{itemize}
+\end{definition}
+
+Then we can prove the following important Lemma
+
+\begin{lemma}{Fixed Point Lemma for Normal Functions}{fixed_point_lemma}
+    The class of fixed points of any normal class-function $F$ is unbounded in $\text{Ord}$.
+\end{lemma}
+
+Note then that, since $F(\alpha)=\aleph_\alpha$ is a normal function, such theorem implies there are arbitrarily large aleph fixed points. In fact, the idea of the proof is similar of the one for aleph fixed points.
+
+\begin{proof}
+    Given an ordinal $\alpha$, we want to let $\beta=\bigcup_{n\in\omega}F^n(\alpha)$, then, since $F$ is increasing, $\beta\geq\alpha$. We now wish to use normality to conclude that
+    $$F(\beta)=\bigcup_{n\in\omega}F(F^n(\alpha))=\bigcup_{n\in\omega}F^{n+1}(\alpha)=\beta$$
+    In fact, let's prove something stronger: If $A$ is a non-empty set of ordinals, then
+    $$F\rp{\bigcup_{\alpha\in A}\alpha}=\bigcup_{\alpha\in A}F(\alpha)$$
+    $(\supseteq)$ Since $\alpha\leq\bigcup_{\alpha\in A}\alpha$, and $F$ is increasing, then $\bigcup_{\alpha\in A}F(\alpha)\leq F\rp{\bigcup_{\alpha\in A}\alpha}$.
+    
+    $(\subseteq)$ Let $\beta=\bigcup_{\alpha\in A}\alpha$, if $\beta$ is a successor ordinal, then $\beta$ is already in $A$, so the inclusion is trivial. Otherwise, $\beta$ is a limit ordinal, and then by normality we have
+    $$F(\beta)=\bigcup_{\lambda<\beta}F(\lambda)\leq \bigcup_{\alpha\in A}F(\alpha)$$
+    Where the last inequality come from the fact that if $\lambda<\beta=\bigcup_{\alpha\in A}\alpha$, then $\lambda<\alpha$, for some $\alpha\in A$, and since $F$ is increasing, $F(\lambda)<F(\alpha)$.    
+\end{proof}
+
+And, now we have an appropriate nomenclature, note we can prove an inaccessible $\kappa$ is a $F$ fixed point, for some other normal functions $F$:
+
+For example, whenever $F(\alpha)<\kappa$, for any $\alpha<\kappa$.
+
+Since $F$ is increasing, $F(\alpha)\geq\alpha$, for any ordinal $\alpha$. But also, since $F$ is normal
+$$F(\kappa)=\sup_{\alpha<\kappa}F(\alpha)\leq \sup_{\alpha<\kappa}\alpha=\kappa$$
+so $F(\kappa)=\kappa$. Then, for example, $\kappa$ would also be a beth fixed point, since we can let $F(\alpha)=\beth_\alpha$.
+
+Also, if $\kappa$ is already a $F$ fixed point, we can let $G$ be an enumeration of the $F$ fixed point, and then $\kappa$ would also be a $G$ fixed point. So for example, if you list all aleph fixed point, $\kappa$ would be as far in the ``line'' of such fixed points as its own size, and so on.
+
+\subsection{Hausdorff's Theorem}\label{subsec:hausdorff}
+
+Let $\wic{\kappa}$ be ``$\kappa$ is a weakly inaccessible cardinal'', and $\mathrm{WIC}$ be the assertion that $\exists\kappa(\wic{\kappa})$. It's actually a non-trivial fact, which we will show at the end of the chapter, that
+\begin{equation}\label{eq:zfc_wic}
+    \zfc\nvdash\mathrm{WIC}
+\end{equation}
+but, for know, we can show this for (strongly) inaccessible cardinals. Let then $\ic{\kappa}$ denote the statement that $\kappa$ is an inaccessible cardinal and $\mathrm{IC}=\exists\kappa(\ic{\kappa})$, as usual.
+
+We will now show that ZFC can't prove inaccessible cardinals exists. This is done by proving $V_\kappa\vDash\text{ZFC}$, when $\kappa$ is an inaccessible cardinal. As usual, we first need to stablish a bound on the rank of sets constructed from $V_\kappa$. This is done by the next lemma.
+
+\begin{lemma}{}{inaccessible_rank}
+    If $\kappa$ is an inaccessible cardinal, then $\lvert x\rvert<\kappa$, for every $x\in V_\kappa$.
+\end{lemma}
+
+\begin{proof}
+    We will give two distintic proofs for this lemma:
+    \begin{itemize}
+        \item In the first, we will use a result in my \href{https://github.com/Xennonio/Consistency-Results}{Consistecy Results} notes, which says $\lvert V_\gamma\rvert\leq \beth_\gamma$. Now, given $\kappa$ an inaccessible, and $x\in V_\kappa$, then $x\in V_\gamma$ for some $\gamma<\kappa$, but since $V_\gamma$ is a transitive set, then we also have $x\subseteq V_\gamma$, so
+        $$\lvert x\rvert\leq\lvert V_\gamma\rvert\leq\beth_\gamma<\beth_\kappa=\kappa$$
+        where in the next equality we used that $\kappa$ is a beth fixed point, as we saw in the end of the previous subsection;
+        \item For the second, we will use transfinite induction on $\gamma$ to show $\lvert V_\gamma\rvert<\kappa$. For $\gamma=0$ it's trivial. Now, assume it's true for $\gamma$, then, since $\kappa$ is a strong limit,
+        $$\lvert R_{\gamma+1}\rvert=\lvert\mc{P}(V_\gamma)\rvert=2^{\lvert V_\gamma\rvert}<\kappa.$$
+        Now, if $\lambda$ is a non-zero limit ordinal, and for all $\gamma<\lambda$, $\lvert V_\gamma\rvert<\kappa$, then, since $\kappa$ is regular,
+        $$\lvert V_\lambda\rvert=\left\lvert\bigcup_{\gamma<\lambda}V_\gamma\right\rvert\leq\sum_{\gamma<\lambda}\lvert V_\gamma\rvert<\kappa.$$
+    \end{itemize}
+\end{proof}
+
+We can now prove our main result, due to Hausdorff.
+
+\begin{theorem}{(Hausdorff)}{hausdorff}
+    If $\kappa$ is inaccessible, then $V_\kappa\vDash\text{ZFC}$.
+\end{theorem}
+
+\begin{proof}
+    First of all, I already have a complete proof in my \href{https://github.com/Xennonio/Consistency-Results}{Consistency Results} notes that $V_\gamma\vDash\text{ZC}$, whenever $\gamma>\omega$ is a limit ordinal. Then it's sufficient to show $V_\kappa$ satisfies replacement.
+
+    Now, as usual, we will prove the second order version of replacement, then let $F:V_\kappa\to V_\kappa$ and $x\in V_\kappa$, we claim $F[x]\in V_\kappa$. Since $F[x]=\{F(y):y\in x\}$, let's estimate $\text{rank}(F(y))$. Since $V_\kappa$ is transitive, and $x\in V_\kappa$, then $y\in V_\kappa$, and so $F(y)$, therefore $\text{rank}(F(y))<\kappa$. Now, let
+    $$C=\{\text{rank}(F(y))+1:y\in x\}\subseteq\kappa$$
+    Since $\lvert C\rvert\leq\lvert x\rvert<\kappa$ (by the previous lemma), then $C$ is a subset of $\kappa$ of size $<\kappa$, then, since $\kappa$ is regular, $C$ is bounded in it by some $\alpha$, and then $F[x]\in V_{\alpha+1}\subseteq V_\kappa$, as desired.
+\end{proof}
+
+Note that \ref{eq:zfc_wic} is now a direct corollary of Hausdorff's Theorem and Gödel's Incompleteness. However, we can also give a Gödel free proof of it:
+
+\begin{corollary}{}{hausdorff}
+    $$\zfc\nvdash\mathrm{IC}$$
+\end{corollary}
+
+\begin{proof}
+    If ZFC proved it, we could define the least inaccessible cardinal $\kappa_0$, and then, by Hausdorff's Theorem, $V_{\kappa_0}\vDash\text{ZFC}$, in particular $V_{\kappa_0}$ also satisfies that there is an inaccessible cardinal $\lambda$, but then $\lambda\in V_{\kappa_0}$, so $\lambda<\kappa_0$, contradicting the minimality of $\kappa_0$.
+\end{proof}
+
+To be fair, the previous proof is not entirely correct, since we didn't justified why $\lambda$ being inaccessible \textit{in} $V_{\kappa_0}$ implies that it's in fact inaccessible. In order to justify that, we need to show the possible counterexamples for $\lambda$ being a cardinal, regular and strong limit, would also be ``seen'' by $V_{\kappa_0}$:
+
+\begin{lemma}{}{ic_absolute}
+    Working in $\zfc+\ic{\kappa}$, for any $\lambda<\kappa$ we can prove
+    $$\ic{\lambda}\iff V_\kappa\vDash\ic{\lambda}$$
+\end{lemma}
+
+\begin{proof}
+    This can be rather tedious if you don't know nothing about absoluteness\footnote{you can learn more about absoluteness in my \href{https://github.com/Xennonio/Consistency-Results}{Consistency Results} notes}, but the idea is that $\ic{\lambda}$ is $\Pi_1$ in nature, implying it's downward absolute under transitive models as $V_\kappa$.
+
+    For the converse, assume for example that $\lambda$ is not a cardinal, then we can find $f:\alpha\to\lambda$ surjective, with $\alpha<\lambda$. Since $\lambda\in V_\kappa$, then $\lambda\in V_\beta$ for some $\beta<\kappa$, but then, by transitivity, $\alpha\in V_\beta$ too and, therefore, $f\in V_{\beta+3}\subseteq V_\kappa$, so $\lambda$ wouldn't be a cardinal in $V_\kappa$ too.
+
+    The proof is similar for the other possibilities, we just need to show our witness of failure will also be in $V_\kappa$, whose proof idea is similar.
+\end{proof}
+
+\section{Worldly Cardinals}
+
+As we saw, $\ic{\kappa}$ imply $V_\kappa\vDash\zfc$. Can we prove the converse, turning Hausdorff's theorem into a characterization? For the sake of investigation, let's then define
+
+\begin{definition}{Worldly Cardinal}{worldly_cardinal}
+    A \lasereye{Worldly Cardinal} $\kappa$ is a cardinal such that $V_\kappa\vDash\zfc$.
+\end{definition}
+
+We denote by $\wc{\kappa}$ the statement that $\kappa$ is a worldly cardinal. As a warmup to see how we work with worldly cardinals, let's prove the following two lemmas.
+
+\begin{lemma}{}{worldly_is_cardinal}
+    If an ordinal $\kappa$ is such that $V_\kappa\vDash\zfc$, then $\kappa$ is worldly.
+\end{lemma}
+
+What the previous lemma says is that if the $\alpha$-th level of the Von Neumann Hierarchy is a model of ZFC, then $\alpha$ itself is automatically a cardinal.
+
+\begin{proof}\footnote{it's worth noticing that, as before, we use some absoluteness results to go from $V$ to $V_\kappa$}
+    If it's not, we would have a bijection $f:\lambda\to\kappa$, for some $\lambda<\kappa$. But then consider the following induced well-ordering in $\lambda$ of order type $\kappa$:
+    $$W=\{(\alpha,\beta):f(\alpha)<f(\beta)\}$$
+    Let's show $\kappa$ is also a limit cardinal. In fact, if it's not, $\kappa=\mu+1$ would be such that, if $\alpha\in V_{\mu+1}$, then $\mathrm{rank}(\alpha)\leq\mu$, i.e., $\mu$ would be a largest ordinal, contradicting that $V_\kappa\vDash\zfc$.
+
+    Now, since $\lambda\in V_\kappa$, then $\lambda\in V_\beta$, for some $\beta<\kappa$, then $W\in V_{\beta+3}$ and, therefore, $(\lambda,W)\in V_{\beta+5}\subseteq V_\kappa$. Since $(\lambda,W)$ is a well-ordering, and $V_\kappa\vDash\zfc$, it's in bijection with a unique ordinal, but such ordinal is $\kappa$ itself! So $\kappa\in V_\kappa$, a contradiction.
+\end{proof}
+
+And what we can say about the least worldly cardinal? Surprisingly, we can prove the following.
+
+\begin{lemma}{}{least_worldly_cof}
+    The least worldly cardinal $\kappa$ has countable cofinality.
+\end{lemma}
+
+\begin{proof}
+    Assume to reach a contradiction that $\cf{\kappa}>\aleph_0$, and let $\zfc=\{\varphi_n\}_{n\in\omega}$, $\Phi_n=\{\varphi_k\}_{k\leq n}$. Since $V_\kappa\vDash\zfc$, for each $n\in\omega$ we get, by Reflection Theorem\footnote{you can see a full proof of it in my \href{https://github.com/Xennonio/Consistency-Results}{Consistency Results} notes, in the Reflection Theorem section}, a club in $\kappa$:
+    $$C_n=\{\alpha<\kappa:V_\alpha\preceq_{\Phi_n} V_\kappa\}$$
+    It's a well known theorem that the Club Filter in $\kappa$ is $\cf{\kappa}$-complete\footnote{I have a proof for $\kappa$ regular in my \href{https://github.com/Xennonio/Cofinality}{Cofinality} notes, but it's clear how to generalize it to any cardinal $\kappa$ instead}, so
+    $$C=\bigcap_{n\in\omega}C_n$$
+    is also a club. Now, let $\alpha\in C$, then $V_\alpha\preceq_{\Phi_n}V_\kappa$, for every $n\in\omega$, which implies $V_\alpha\vDash\zfc$, contradicting that $\kappa$ is the least worldly ordinal. So $\cf{\kappa}=\aleph_0$.
+\end{proof}
+
+You can interpret the previous lemma as saying that, at least, the first worldly cardinal is ``small'', which naturally lead you to the question of what are the possible cofinalities of worldly cardinals. In fact, the next theorem will have everything you need to answer this question.
+
+\begin{theorem}{}{V_elementary_unbounded}
+    If $\kappa$ is an inaccessible cardinal, then $\{\lambda<\kappa:V_\lambda\preceq V_\kappa\}$ is unbounded in $\kappa$.
+\end{theorem}
+
+\begin{sketch}
+    Given $\alpha<\kappa$, the idea to find such $V_\lambda\preceq V_\kappa$, for $\alpha<\lambda<\kappa$, is to use Tarski Vaught's Test\footnote{as always, it's in my \href{https://github.com/Xennonio/Consistency-Results}{Consistency Results} notes} (TVT). In order to do that, we start with $V_\alpha$ and, for each $\varphi(x,\ol{a})$, with $\ol{a}\in V_\alpha^{<\omega}$, if $V_\kappa\vDash\varphi(b,\ol{a})$, for some $b\in V_\kappa$, we find the level $\beta$ where $b\in V_\beta$, and then we consider the limit process of taking all such $\beta$'s (it's not hard to see how regularity of $\kappa$ helps us here).
+
+    We then just do a $\omega$-iteration of such process to construct our elementary substructure $V_\lambda$ that is closed under such witnessing required by TVT.
+\end{sketch}
+
+\begin{proof}
+    Given $\alpha<\kappa$, let $\alpha_0=\alpha+1$. By recursion, assume $\alpha_n<\kappa$ is already defined. We know by \cref{lem:inaccessible_rank} that $\lvert V_{\alpha_n}\rvert<\kappa$, so $\lvert V_{\alpha_n}^{<\omega}\rvert<\kappa$ too. Furthermore, since there are only countably many formulas in the language of Set Theory, we have
+    \begin{equation}\label{eq:auxiliary1}
+        \left\lvert\mathrm{Fml}\times V_{\alpha_n}^{<\omega}\right\rvert<\kappa
+    \end{equation}
+    It's clear that $\mathrm{Fml}\times V_{\alpha_n}^{<\omega}$ encodes our formulas $\varphi(x,\ol{a})$, where $\ol{a}\in V_{\alpha_n}$. Let's now define our rank function $r$ in such set of formulas that gives us the level of our witness.
+
+    Given $\varphi(x,\ol{a})$, if $V_\kappa\vDash\varphi(b,\ol{a})$, for some $b\in V_\kappa$, then $b\in V_\gamma$, for some $\gamma<\kappa$, in this case set $r(\varphi,\ol{a})=\gamma$. Otherwise, just let $r(\varphi,\ol{a})=0$.
+
+    Now, since the domain of $r$ satisfies (\ref{eq:auxiliary1}), it's a set of $<\kappa$ ordinals $<\kappa$. By regularity of $\kappa$, it's bounded by some $\beta<\kappa$, and then we can deefine
+    $$\alpha_{n+1}:=\max\{\beta,\alpha_n+1\}$$
+    Then, we just need to let
+    $$\lambda:=\bigcup_{n\in\omega}\alpha_n<\kappa$$
+    where the inequality also follows from regularity. Then, clearly, if $V_\kappa\vDash\varphi(b,\ol{a})$, for some $b\in V_\kappa$ and $\ol{a}\in V_\lambda^{<\omega}$, then $\ol{a}\in V_{\alpha_n}^{<\omega}$, for some $n\in\omega$, which, by definition, implies that there is some $c\in V_{\alpha_{n+1}}^{<\omega}\subseteq V_\lambda^{<\omega}$ such that $V_\lambda\vDash\varphi(c,\ol{a})$. So, by TVT, $V_\lambda\preceq V_\kappa$.
+\end{proof}
+
+Let's see what are the consequences of such theorem. First, note that, if $\kappa$ is worldly, and $V_\lambda\preceq V_\kappa$, then $\lambda$ is also worldly. So the previous theorem actually implies that the set of worldly cardinals bellow an inaccessible is unbounded in it! Which means, for example, that there are as many worldly cardinals bellow $\kappa$ as we can, i.e., exactly $\kappa$ many. Maybe more impressive, if we look at the proof of the theorem, we can conclude the following as a scholium.
+
+\begin{corollary}{}{worldly_cf_omega}
+    The set of worldly cardinals of cofinality $\aleph_0$ bellow an inaccessible $\kappa$ is unbounded in it.
+\end{corollary}
+
+Such corollary have two important consequences hidden inside it. The first is the answer for the question we posed at the beginning of the section. If $\kappa$ is the least inaccessible cardinal, by the previous Theorem we get $\kappa$-many smaller worldly, and then, even though $\ic{\kappa}\Rightarrow\wc{\kappa}$, the converse is unattainable. However, this doesn't mean we have no hope to turn Hausdorff's Theorem into a characterization! In fact, the next lemma shows we can.
+
+\begin{lemma}{(Zermelo and Shepherdson)}{shepherdson}
+    $\kappa$ is an inaccesible cardinal if, and only if, $V_\kappa\vDash\zfc_2$
+\end{lemma}
+where $\zfc_2$ denotes the second order version of ZFC, with the replacement schema replaced by its single second order analogue.
+
+\begin{proof}
+    $(\Rightarrow)$ This is exactly the proof of Hausdorff's Theorem;
+
+    $(\Leftarrow)$ To see $\kappa$ is regular, assume it's not, then there would be an $F:\alpha\to\kappa$ with image unbounded in $\kappa$, but since $F\subseteq V_\kappa$ and we have second order replacement, then $F[\alpha]\in V_\kappa$. Hence $\sup(F[\alpha])=\kappa\in V_\kappa$, a contradiction.
+
+    Then it remains to show it's a strong limit. If there was a $\lambda<\kappa$, with $2^\lambda\geq\kappa$, then we would have a surjection $F:\mc{P}(\lambda)\to\kappa$, but $\mc{P}(\lambda)\in V_\kappa$, meaning $F\subseteq V_\kappa$ too and, again, by second order replacement $F[\mc{P}(\lambda)]=\kappa\in V_\kappa$, a contradiction.
+\end{proof}
+
+And the second is that there is no chance to prove that every inaccessible cardinal will have a smaller regular worldly cardinal, as the next corollary, jointly with the relative consistency of GCH\footnote{for a full proof that GCH is consistent with ZFC, look at The Constructible Universe $L$ chapter in my \href{https://github.com/Xennonio/Consistency-Results}{Consistency Results} notes}, shows.
+
+\begin{corollary}{}{inaccessible_wo_regular_worldly}
+    In $\zfc+\mathrm{GCH}$ there are inaccessible cardinals with no regular worldly cardinals below it.
+\end{corollary}
+
+\begin{proof}
+    Under GCH we have that limit and strong limit are equivalent, and then, if there was any regular worldly bellow the least inaccessible, it couldn't be a limit cardinal, since this would imply it's also inaccessible. However, as we saw in the proof of \cref{lem:worldly_is_cardinal}, worldly cardinals are always limit, and then we don't have any worldly cardinal bellow the least inaccessible.
+\end{proof}
+
+As for now, what we saw is that there are a lot of ``small'' worldly cardinals bellow an inaccessible, and that there is no hope to find ``very large'' ones, like regulars. A natural question is then for which other cofinalities we can attain analogous results?
+
+In fact, note that the quirk of having countable cofinality is just a consequence of we choosing a countable increasing sequence $(\alpha_n)$ of ordinals, why couldn't we just do the same for other possible lengths of our sequence? It turns out we can, and for almost all possible lengths!
+
+\begin{corollary}{}{worldly_cofs}
+    If $\kappa$ is inaccessible, and $\mu<\kappa$ is regular, then the set
+    $$W^\mu:=\{\lambda<\kappa:\wc{\lambda}\text{ and }\cf{\lambda}=\mu\}$$
+    is unbounded in $\kappa$.
+\end{corollary}
+
+\begin{proof}
+    by \cref{th:V_elementary_unbounded} we can let
+    $$(\lambda_\alpha)_{\alpha<\kappa}=\{\lambda\in\kappa:V_\lambda\preceq V_\kappa\}$$
+    then, $V_{\lambda_\alpha},V_{\lambda_\beta}\preceq V_\kappa$, for $\alpha,\beta\in\kappa$ and, if $\alpha<\beta$, then $V_{\lambda_\alpha}\preceq V_{\lambda_\beta}$. So, if $X\subseteq\kappa$ is an arbitrary subset, we have that $\{V_{\lambda_\alpha}:\alpha\in X\}$ is an elementary chain.
+
+    Now, consider $X=\mu$ regular, then $\bigcup_{\alpha<\mu}V_{\lambda_\alpha}=V_\lambda$, where $\lambda=\bigcup_{\alpha<\mu}\lambda_\alpha$ and, by Tarski Chain Lemma\footnote{this is a classical lemma whose proof is just an adaptation of the proof of TVT}, we get $V_{\lambda_\alpha}\preceq V_\lambda$ for any $\alpha<\mu$, so $V_\lambda\vDash\zfc$. But then, by definition of $\lambda$, we automatically have that $\cf{\lambda}=\mu$, as desired.
+\end{proof}
+
+\section{Weakly Inaccessible Cardinals}
+
+As I promised in \cref{subsec:hausdorff}, here is a proof that ZFC can't prove there is a weakly inaccessible cardinal.
+
+\begin{theorem}{}{zfc_wic}
+    $$\zfc\nvdash\mathrm{WIC}$$
+\end{theorem}
+
+\begin{proof}
+    Here we will need some of the same results we used throughout the last section, namely the constructible universe $L$. If there was a weakly inaccessible $\kappa$, we could consider $L_\kappa$. We already know for uncountable regular $\mu$ that $L_\mu\vDash\zfc-\text{PowerSet}$. Now, by a similar argument to $V_\kappa$, given $x\in L_\kappa$, we know $x\in L_\lambda$, for some $\lambda<\kappa$, but then $\mc{P}(x)\cap L_\kappa\subseteq L_{\lambda+1}\subseteq L_\kappa$, and then $L_\kappa\vDash\zfc$ so we can prove ZFC is consistent, a contradiction.
+\end{proof}
+
+Until now, we saw IC implies both WIC and WC, and that IC is not equivalent to WC, then what can we say about WIC? Here we run in some problems: in the proof that $\mathrm{WC}\nRightarrow\mathrm{IC}$, we showed that, if $\kappa$ was inaccessible, we could always find a smaller worldly that was not inaccessible. However, what if we tried to do the same for WIC? Let $\kappa$ be an inaccessible, and suppose we make some construction to find a weakly $\mu<\kappa$ that is not inaccessible, then we could repeat the exactly same construction in $L$! And then $\mu$ would also be an inaccessible.
+
+In other words, we can't search for weakly inaccessible inside the model, we need to look outside, i.e., using Forcing! As I kept saying through this first chapters, almost all consistency tool you don't know you can find in my \href{https://github.com/Xennonio/Consistency-Results}{Consistency Results} note that you will probably find it there, it's no different for Forcing.
+
+So let $\kappa$ be an inaccessible cardinal. Since it has uncountable cofinality, we can use Hechler's Forcing to force $\mf{c}=\kappa^+$, by ccc $\kappa$ is still a limit and regular, but now, since $\aleph_0<\kappa$, and
+$$2^{\aleph_0}=\mf{c}=\kappa^+>\kappa$$
+then $\kappa$ is no longer strongly inaccessible! As desired.
+
+So now it remains to pin the relationship between WIC and WC. Well, under WIC, as we saw, the least worldly has countable cofinality, and therefore can't be weakly inaccessible.
