@@ -2,3 +2,171 @@
 
 \section{The Measure Problem}
 
+\subsection{Set Theoretic Version}
+
+It's a classical problem to seek for a non-constant, translational invariant, $\sigma$-additive probabilistic measure $\mu:\mc{P}(\mbb{R})\to[0,1]$ in the reals $\mbb{R}$. And, as we know, Vitali showed such task is impossible.
+
+The construction is rather simple for a modern set theorist, consider the real numbers modulo a rational, $\mbb{R}/\mbb{Q}$, and let $V$ be a transversal in $[0,1]$. We will show
+$$[0,1]\subseteq\bigcup_{q\in[-1,1]\cap\mbb{Q}}V+q\subseteq[-1,2].$$
+Since $V\subseteq[0,1]$, the second inclusion is clear. For the first let $r\in[0,1]$, then by definition of $V$ we can find $v\in[r]\cap V$, so $r-v\in[-1,1]\cap\mbb{Q}$, and then $r=v+(r-v)\in V+(r-v)$. So
+$$0<\mu([0,1])\leq\sum_{n}\mu(V)\leq\mu([-1,2])<1$$
+which is impossible for any value $\mu(V)$ could assume.
+
+From here, there are two possible paths. Measure theory lead the one weakening the domain of $\mu$, i.e., considering the measure only for the sets in a $\sigma$-algebra of $\mbb{R}$. Set theory lead the other where the geometrical condition of translational invariance is weakened.
+
+Banach showed that, without translational invariance, we could find trivial measures $\mu_r$ on any set $S$, with $r\in S$, as follows:
+\begin{equation}\label{eq:banach_trivial_measure}
+    \mu_r(A)=\begin{cases}
+    1,\text{ if }r\in A;\\
+    0,\text{ otherwise}.
+\end{cases}
+\end{equation}
+So he imposed that, instead of translational invariance, we had a non-triviality condition, i.e., that $\mu(\{x\})=0$, $\forall x\in S$ which, with $\sigma$-additivity, guarantees us that all finite sets have measure $0$ too.
+
+So, for the sake of our sanity, let's just pin down that, throughout this section, a function $\mu:\mc{P}(S)\to[0,1]$ is a measure on/over $S$ if $\mu(\emptyset)=0$, $\mu(S)=1$, it's non-trivial and it's $\sigma$-additive.
+
+A measure on $S$ depends only on $\lvert S\rvert$, so for now on we will consider measures solely on cardinals. We can then state the set-theoretic version of the Measure Problem, as proposed by Banach:
+
+\begin{tcolorbox}[colback=gray!5,colframe=gray!80!black]
+\centering
+\lasereye{\textbf{Set Theoretic Measure Problem. (Banach)}}
+
+Can we find a measure on $\mf{c}$. Or rather at least on some infinite $\kappa$?
+\end{tcolorbox}
+
+In order to keep investigating measures on infinite cardinals, consider the following generalization of the notion of $\sigma$-additiveness, which guarantees us that, as for the finite sets, any set of cardinality $\lambda<\kappa$ has also measure zero.
+
+\begin{definition}{$\kappa$-additive measure}{kappa_additive_measure}
+    We say a measure $\mu$ is \lasereye{$\kappa$-additive} if, for any $\lambda<\kappa$ and pairwise disjoint sets $\{X_\alpha\}_{\alpha<\lambda}$,
+    $$\mu\rp{\bigcup_{\alpha<\lambda}X_\alpha}=\sum_{\alpha<\lambda}\mu(X_\alpha):=\sup\left\{\sum_{\alpha\in E}\mu(X_\alpha):E\in[\lambda]^{<\omega}\right\}.$$
+\end{definition}
+
+With such nomenclature, $\sigma$-additive is just $\aleph_1$-additive.
+
+In fact, if $\mu$ is a $\kappa$-additive measure on a set $S$, then any subset of size $<\kappa$ has measure $0$, as desired. The next lemma explains why we care about $\kappa$-additiveness, it says that the solution for the Set Theoretic Measure Problem is related to the existence of a $\kappa$-additive measure.
+
+\begin{lemma}{}{measure_implies_kappa_add}
+    Let $\kappa$ be the least cardinal with a measure in it, then every measure over $\kappa$ is $\kappa$-additive.
+\end{lemma}
+
+\begin{proof}
+    Assume by a contradiction that there are pairwise disjoint $\{X_\alpha\}_{\alpha<\lambda}$ with
+    \begin{equation}\label{eq:auxiliary2}
+        \mu\rp{\bigcup_{\alpha<\lambda}X_\alpha}\neq\sum_{\alpha<\lambda}\mu(X_\alpha).
+    \end{equation}
+    As I said, $\mu(X_\alpha)\neq0$ for at most countably many $\alpha$'s, so assume WLOG (by removing and reindexing them if necessary) that $\mu(X_\alpha)=0$ for any $\alpha<\lambda$. But, by eq. (\ref{eq:auxiliary2}), we have
+    $$\mu\rp{\bigcup_{\alpha<\lambda}X_\alpha}=r>0.$$
+    So the following $\widetilde{\mu}:\mc{P}(\lambda)\to[0,1]$ is a measure over $\lambda$:
+    $$\widetilde{\mu}(Y):=\frac1r\cdot \mu\rp{\bigcup_{\alpha\in A}X_\alpha}$$
+    contradicting the minimality of $\kappa$.
+\end{proof}
+
+So, now that we saw the importance of $\kappa$-additive measures, we can then define:
+
+\begin{definition}{Real-Valued Measurable}{real_valued_measurable}
+    A cardinal $\kappa>\omega$ is \lasereye{real-valued measurable} if there is a nontrivial $\kappa$-additive measure on $\kappa$.
+\end{definition}
+
+Since a solution for the Set Theoretic Measure Problem implies the existence of a real-valued measurable cardinal, we can now ask if there is any real-valued measurable cardinal.
+
+As expected of a Large Cardinal Notes, the answer for this problem is related to the existence of some large cardinals, and therefore is independent of ZFC. To see this, note that, if $\kappa$ is real-valued measurable, by $\kappa$-additivity we have that $\kappa$ is regular. In fact, Banach established that, under GCH, every real-valued measurable cardinal is weakly inaccessible. But we can do even better! Ulam showed in his doctoral dissertation that we can remove GCH from Banach's result, as we will see later.
+
+\subsection{Measures with Atoms}
+
+Before proving the previous results, let's remark an important dichotomy between measures:
+
+\begin{definition}{Atoms}{}
+    Let $\kappa$ be real-valued measurable. A subset $A\subseteq\kappa$ with $\mu(A)>0$ is called an \lasereye{atom} if for every $B\subseteq A$, either $\mu(B)=0$ or $\mu(B)=\mu(A)$.
+
+    We say a measure $\mu$ over $\kappa$ is \lasereye{atomless} if there is no atom $A\subseteq\kappa$.
+\end{definition}
+
+What is so important about being or not atomless? Note that, if $\mu$ has an atom $A\subseteq\kappa$, then
+$$\widetilde{\mu}(X)=\frac{\mu(A\cap X)}{\mu(A)}$$
+is a $2$-valued measure. We clearly have a correspondence, since every $A$ with positive measure is an atom in a $2$-valued measure. So, in some sense, atoms gives us some sort of generalization of Banach's trivial measure (\ref{eq:banach_trivial_measure}). We will see, however, that such measures are far from being trivial, and, maybe unexpectedly, will be way more fruitful to us than atomless measures!
+
+The reason why atoms are such a big deal is that we can make a correspondence between $\kappa$-complete free ultrafilters on $\kappa$ and $\kappa$-additive non-trivial measures with atoms on $\kappa$, as follows:
+\begin{itemize}
+    \item Given an ultrafilter $U$, let $\mu(X)=1$ iff $X\in U$;
+    \item Given a measure $\mu$, let $X\in U$ iff $\mu(X)=1$.
+\end{itemize}
+
+Which gives rise to the following Large Cardinal Axiom.
+
+\begin{definition}{Measurable Cardinal}{measurable_cardinal}
+    A cardinal $\kappa$ is \lasereye{measurable} if there is a $2$-valued $\kappa$-additive measure on it.
+\end{definition}
+
+As noted earlier, $\kappa$-additivity implies regularity of $\kappa$. In fact, with atoms we can prove even more!
+
+\begin{theorem}{}{measurable_inaccessible}
+    Every measurable cardinal is inaccessible.
+\end{theorem}
+
+\begin{proof}
+    Let $\kappa$ be a measurable cardinal and $U$ be its $\kappa$-complete free ultrafilter.
+    
+    Assume by a contradiction that there is some $\lambda<\kappa$, with $2^\lambda\geq\kappa$. Then we can find an injection $F:\kappa\to2^\lambda$ such that $F_\alpha:\lambda\to2$. So, given $\xi\in\lambda$, we have
+    $$\kappa=\{\alpha\in\kappa:F_\alpha(\xi)=0\}\sqcup\{\alpha\in\kappa:F_\alpha(\xi)=0\}.$$
+    But, since $U$ is an ultrafilter, either one of these sets are in $U$. Let $b_\xi$ be such that
+    $$A_\xi=\{\alpha\in\kappa:F_\alpha(\xi)=b_\xi\}\in U.$$
+    Then, by $\kappa$-completeness of $U$, we have that
+    $$A=\bigcap_{\xi<\lambda}A_\xi\in U.$$
+    However, if $\alpha\in A$, then $F_\alpha(\xi)=b_\xi$ for every $\xi\in\lambda$, i.e., $F_\alpha$ is a completely determined function, so $\lvert A\rvert\leq 1$, contradicting that $U$ is free and $A\in U$.
+\end{proof}
+
+This guarantees us that measurability is a Large Cardinal Axiom. Whether this is equivalent or not to inaccessibility was an open problem for quite some time. As expected (otherwise we weren't spent a whole section talking about measurables) they're not equivalent, which we will prove later after introducing some other large cardinals axioms.
+
+\subsection{Real-Valued Measures}
+
+Finally, as promised, let's return to the study of real-valued measures and see how the existence of atomless measures gives us some weird results about the continuum.
+
+The previous subsection shows us that there is no hope to find\footnote{at least in ZFC} a $2$-valued measure on $\mf{c}$, but what about an atomless one? As we spoiled earlier, real-valued measurability implies weakly inaccessibility, which is now clear for the case with atoms. In order to prove this for real-valued measures, we can't use the set of subsets with measure $1$, since it won't be a filter anymore.
+
+So, to do what we want, let's analyze it's dual notion! I.e., the ideal of null subsets of $\kappa$:
+$$I_\mu:=\{X\subseteq\kappa:\mu(X)=0\}.$$
+It's clear that, if $\mu$ is a $\lambda$-additive measure, then $I_\mu$ is a free $\lambda$-complete ideal. Morever, it's what we call a $\sigma$-saturated ideal, i.e., every family $\mc{F}$ of pairwise disjoint subsets of $\kappa$ that aren't in $I_\mu$ is at most countable. To see this, note that
+$$\mc{F}=\bigcup_{n\geq1}\{X\in\mc{F}:\mu(X)\geq1/n\}$$
+where each term in the RHS is at most finite.
+
+This may seem like a not really powerful remark, but the fact that the ideal of null sets is $\sigma$-saturated is actually really strong! It's the reason why a lot of the following beautiful results work and also why we can relate the Set Theoretic Measure Problem with measures on $\mbb{R}$. In fact, note that $\sigma$-saturation follows solely by the fact that we decided to measure sets with reals\footnote{that's why it's called a real-valued measure, after all. despite $\kappa$-additivity, such generalization is not a completely set-theoretic one, since it relies on measuring as ``humans'' naturally would} in $[0,1]$.
+
+About $\lambda$-additivity implying $\lambda$-completeness, we can also prove the converse result:
+
+\begin{lemma}{}{completeness_additivity}
+    Let $\mu$ be a measure on $\kappa$, if $I_\mu$ is $\lambda$-complete, then $\mu$ is $\lambda$-additive.
+\end{lemma}
+
+\begin{proof}
+    Given $\gamma<\lambda$, let $\{X_\alpha\}_{\alpha<\gamma}$ be a family of pairwise disjoint subsets of $\kappa$, since our ideal $I_\mu$ is $\sigma$-saturated, we know at most countably many of those $X_\alpha$'s have positive measure, let's say $Y_n$, for $n\in\omega$. But then, by $\kappa$-completeness of $I_\mu$ and $\sigma$-additivity of $\mu$:
+    $$\mu\rp{\bigcup_{\alpha<\gamma}X_\alpha}=\mu\rp{\bigcup_{n\in\omega}Y_n}=\sum_{n\in\omega}\mu(Y_n)=\sum_{\alpha<\gamma}\mu(X_\alpha)$$
+    as desired. So $\mu$ is $\kappa$-additive.
+\end{proof}
+
+Let's now prove our first consequence about the existence of atomless measures.
+
+\begin{lemma}{}{atomless1}
+    If there is an atomless measure, then there is also one on some $\kappa\leq\mf{c}$.
+\end{lemma}
+
+\begin{sketch}
+    Let's first sketch this proof, because it's really nice. It makes clear how different atomless measures are and how ``strong'' the $\sigma$-saturation property is.
+
+    Let $\mu$ be such measure on $S$. The fact that it's atomless gives us the following amazing property:
+    $$\text{If $X\subseteq S$, then we can write $X=Y\sqcup Z$, where $\mu(Y),\mu(Z)>0$}$$
+    I.e., we can partition any set in subsets of positive measure. Otherwise $X$ would be an atom.
+
+    Now, starting with $S$, partition it in two subsets of positive measure. We can then partition such subsets in other subsets of positive measure. If we keep going on such process, we can construct an infinite binary tree, where in the limit level we take all possible intersections of transversals with positive measure. Let's analyze how it looks like.
+
+    Each level of our tree consists of pairwise disjoint sets of positive measure, then, by $\sigma$-saturation, each level has countably many sets. What about the size $\kappa$ of our tree? Let 
+    $$b=\{X_\alpha:\alpha<\lambda\},\text{ with }\lambda<\kappa\text{ and }X_\alpha\text{ a set in the $\alpha$-th level}$$
+    be branch of it. By definition, $\mu(X_{\alpha+1})<\mu(X_\alpha)$, and so $Y_\alpha=X_{\alpha+1}\setminus X_\alpha$ form a family of $\lambda$-many pairwise disjoint sets of positive measure. Again, by $\sigma$-saturation, we have that the size $\kappa$ of our tree is also countable.
+
+    Now, look at the limit point of each branch, they all have measure 0, otherwise it wouldn't be the limit point, since we could keep going on our process. And they form a partition of $S$. Finally, since the tree is binary, there are at most $\mf{c}$ of them.
+
+    So we've constructed $\leq\!\mf{c}$-many null sets, whose union is $S$, i.e., our measure isn't $\mf{c}^+$-additive! Then it just remains to induce a measure on $\kappa$.
+\end{sketch}
+
+\begin{proof}
+    
+\end{proof}

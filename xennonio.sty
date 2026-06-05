@@ -60,10 +60,11 @@ usepackage("bm");
 \newcommand{\ol}[1]{\overline{#1}}
 \newcommand{\rp}[1]{{\left(#1\right)}}
 \renewcommand\qedsymbol{$\blacksquare$}
-\newcommand{\cf}[1]{\mathrm{cf}\left(#1\right)}
-\newcommand{\wic}[1]{\mathrm{WIC}\left(#1\right)}
-\newcommand{\ic}[1]{\mathrm{IC}\left(#1\right)}
-\newcommand{\wc}[1]{\mathrm{WC}\left(#1\right)}
+\newcommand{\cf}[1]{\mathrm{cf}\!\left(#1\right)}
+\newcommand{\wic}[1]{\mathrm{WI}\!\left(#1\right)}
+\newcommand{\ic}[1]{\mathrm{I}\!\left(#1\right)}
+\newcommand{\con}[1]{\mathrm{Con}\!\left(#1\right)}
+\newcommand{\wc}[1]{\mathrm{W}\!\left(#1\right)}
 \newcommand{\zfc}{\mathrm{ZFC}}
 \renewcommand{\figurename}{Fig.}
 \renewcommand{\contentsname}{Summary}
@@ -129,6 +130,7 @@ usepackage("bm");
     attach title to upper,
     after title={:\enskip},
     borderline west={5pt}{0pt}{lorelei},
+    before upper={\setlength{\parskip}{0.3\baselineskip}},
 }
 \BeforeBeginEnvironment{sketch}{\savenotes}
 \AfterEndEnvironment{sketch}{\spewnotes}

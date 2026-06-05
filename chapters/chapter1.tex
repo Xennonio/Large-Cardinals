@@ -10,6 +10,8 @@ Hence, the Axiom of Replacement is pointless since, I mean, when does anyone use
 
 As we know, $R(\omega)=V_\omega\vDash\mathrm{FST}$, and $\omega\notin V_\omega$, so $\mathrm{FST}$ can't prove there are such things as infinite cardinals. Even more, we have that the existence of such cardinal implies the consistency of FST! So we could say the Axiom of Infinity is some kind of Large Cardinal Axiom, but for ultrafinitist. We will keep this analogy when talking about consistency hierarchy later, so you don't need to keep thinking like an ultrafinitist until there\footnote{fortunetaly, otherwise you wouldn't get past the first page}.
 
+As a final remark, just to pin down, every time we state a consistency result, like $T\nvdash\varphi$, we're implicitly assuming $\con{T}$, or whatever we need to get rid of the trivial cases. Furthermore, Large Cardinal Axioms will be some sentence of the form $\exists\kappa(\Phi(\kappa))$, which we will denote by $\Phi C$.
+
 \section{Inaccessible Cardinals}
 
 \subsection{Fixed Point Lemma for Normal Functions}
@@ -52,7 +54,7 @@ Since $F$ is increasing, $F(\alpha)\geq\alpha$, for any ordinal $\alpha$. But al
 $$F(\kappa)=\sup_{\alpha<\kappa}F(\alpha)\leq \sup_{\alpha<\kappa}\alpha=\kappa$$
 so $F(\kappa)=\kappa$. Then, for example, $\kappa$ would also be a beth fixed point, since we can let $F(\alpha)=\beth_\alpha$.
 
-Also, if $\kappa$ is already a $F$ fixed point, we can let $G$ be an enumeration of the $F$ fixed point, and then $\kappa$ would also be a $G$ fixed point. So for example, if you list all aleph fixed point, $\kappa$ would be as far in the ``line'' of such fixed points as its own size, and so on.
+Also, if $\kappa$ is already a $F$ fixed point, we can let $G$ be an enumeration of the $F$ fixed point, and then $\kappa$ would also be a $G$ fixed point. So for example, if you list all aleph fixed point, $\kappa$ would be as far in the ``line'' of such fixed points as its own size, and you can keep going on such process.
 
 \subsection{Hausdorff's Theorem}\label{subsec:hausdorff}
 
@@ -98,7 +100,7 @@ We can now prove our main result, due to Hausdorff.
 Note that \ref{eq:zfc_wic} is now a direct corollary of Hausdorff's Theorem and Gödel's Incompleteness. However, we can also give a Gödel free proof of it:
 
 \begin{corollary}{}{hausdorff}
-    $$\zfc\nvdash\mathrm{IC}$$
+    $$\zfc\nvdash\mathrm{IC}.$$
 \end{corollary}
 
 \begin{proof}
@@ -109,7 +111,7 @@ To be fair, the previous proof is not entirely correct, since we didn't justifie
 
 \begin{lemma}{}{ic_absolute}
     Working in $\zfc+\ic{\kappa}$, for any $\lambda<\kappa$ we can prove
-    $$\ic{\lambda}\iff V_\kappa\vDash\ic{\lambda}$$
+    $$\ic{\lambda}\iff V_\kappa\vDash\ic{\lambda}.$$
 \end{lemma}
 
 \begin{proof}
@@ -144,7 +146,7 @@ What the previous lemma says is that if the $\alpha$-th level of the Von Neumann
     Now, since $\lambda\in V_\kappa$, then $\lambda\in V_\beta$, for some $\beta<\kappa$, then $W\in V_{\beta+3}$ and, therefore, $(\lambda,W)\in V_{\beta+5}\subseteq V_\kappa$. Since $(\lambda,W)$ is a well-ordering, and $V_\kappa\vDash\zfc$, it's in bijection with a unique ordinal, but such ordinal is $\kappa$ itself! So $\kappa\in V_\kappa$, a contradiction.
 \end{proof}
 
-And what we can say about the least worldly cardinal? Surprisingly, we can prove the following.
+And what can we say about the least worldly cardinal? Surprisingly, we can prove the following.
 
 \begin{lemma}{}{least_worldly_cof}
     The least worldly cardinal $\kappa$ has countable cofinality.
@@ -195,7 +197,7 @@ Let's see what are the consequences of such theorem. First, note that, if $\kapp
 Such corollary have two important consequences hidden inside it. The first is the answer for the question we posed at the beginning of the section. If $\kappa$ is the least inaccessible cardinal, by the previous Theorem we get $\kappa$-many smaller worldly, and then, even though $\ic{\kappa}\Rightarrow\wc{\kappa}$, the converse is unattainable. However, this doesn't mean we have no hope to turn Hausdorff's Theorem into a characterization! In fact, the next lemma shows we can.
 
 \begin{lemma}{(Zermelo and Shepherdson)}{shepherdson}
-    $\kappa$ is an inaccesible cardinal if, and only if, $V_\kappa\vDash\zfc_2$
+    $\kappa$ is an inaccesible cardinal if, and only if, $V_\kappa\vDash\zfc_2$.
 \end{lemma}
 where $\zfc_2$ denotes the second order version of ZFC, with the replacement schema replaced by its single second order analogue.
 
@@ -210,7 +212,7 @@ where $\zfc_2$ denotes the second order version of ZFC, with the replacement sch
 And the second is that there is no chance to prove that every inaccessible cardinal will have a smaller regular worldly cardinal, as the next corollary, jointly with the relative consistency of GCH\footnote{for a full proof that GCH is consistent with ZFC, look at The Constructible Universe $L$ chapter in my \href{https://github.com/Xennonio/Consistency-Results}{Consistency Results} notes}, shows.
 
 \begin{corollary}{}{inaccessible_wo_regular_worldly}
-    In $\zfc+\mathrm{GCH}$ there are inaccessible cardinals with no regular worldly cardinals below it.
+    Under $\mathrm{GCH}+\mathrm{IC}$, there are inaccessible cardinals with no regular worldly cardinals below it.
 \end{corollary}
 
 \begin{proof}
@@ -227,6 +229,8 @@ In fact, note that the quirk of having countable cofinality is just a consequenc
     is unbounded in $\kappa$.
 \end{corollary}
 
+So, even thought we can find many worldly cardinals with arbitrarily large cofinalities bellow an inaccessible $\kappa$, we can't guarantee there would be even a single regular.
+
 \begin{proof}
     by \cref{th:V_elementary_unbounded} we can let
     $$(\lambda_\alpha)_{\alpha<\kappa}=\{\lambda\in\kappa:V_\lambda\preceq V_\kappa\}$$
@@ -240,16 +244,16 @@ In fact, note that the quirk of having countable cofinality is just a consequenc
 As I promised in \cref{subsec:hausdorff}, here is a proof that ZFC can't prove there is a weakly inaccessible cardinal.
 
 \begin{theorem}{}{zfc_wic}
-    $$\zfc\nvdash\mathrm{WIC}$$
+    $$\zfc\nvdash\mathrm{WIC}.$$
 \end{theorem}
 
 \begin{proof}
     Here we will need some of the same results we used throughout the last section, namely the constructible universe $L$. If there was a weakly inaccessible $\kappa$, we could consider $L_\kappa$. We already know for uncountable regular $\mu$ that $L_\mu\vDash\zfc-\text{PowerSet}$. Now, by a similar argument to $V_\kappa$, given $x\in L_\kappa$, we know $x\in L_\lambda$, for some $\lambda<\kappa$, but then $\mc{P}(x)\cap L_\kappa\subseteq L_{\lambda+1}\subseteq L_\kappa$, and then $L_\kappa\vDash\zfc$ so we can prove ZFC is consistent, a contradiction.
 \end{proof}
 
-Until now, we saw IC implies both WIC and WC, and that IC is not equivalent to WC, then what can we say about WIC? Here we run in some problems: in the proof that $\mathrm{WC}\nRightarrow\mathrm{IC}$, we showed that, if $\kappa$ was inaccessible, we could always find a smaller worldly that was not inaccessible. However, what if we tried to do the same for WIC? Let $\kappa$ be an inaccessible, and suppose we make some construction to find a weakly $\mu<\kappa$ that is not inaccessible, then we could repeat the exactly same construction in $L$! And then $\mu$ would also be an inaccessible.
+Until now, we saw IC implies both WIC and WC, and that IC is not equivalent to WC, then what can we say about WIC? Here we run in some problems: in the proof that $\mathrm{WC}\nRightarrow\mathrm{IC}$, we showed that, if $\kappa$ was inaccessible, we could always find a smaller worldly that was not inaccessible. However, what if we tried to do the same for WIC? Let $\kappa$ be an inaccessible, and suppose we make some construction to find a weakly $\mu<\kappa$ that is not inaccessible, then we could repeat the exactly same construction in $L$! And then $\mu$ would also be an inaccessible, a contradiction.
 
-In other words, we can't search for weakly inaccessible inside the model, we need to look outside, i.e., using Forcing! As I kept saying through this first chapters, almost all consistency tool you don't know you can find in my \href{https://github.com/Xennonio/Consistency-Results}{Consistency Results} note that you will probably find it there, it's no different for Forcing.
+In other words, we can't search for weakly inaccessibles inside the model, we need to look outside, i.e., using Forcing! As I kept saying through this first chapters, almost all consistency tool you don't know you can look in my \href{https://github.com/Xennonio/Consistency-Results}{Consistency Results} note that you will probably find it there, this is no different for Forcing.
 
 So let $\kappa$ be an inaccessible cardinal. Since it has uncountable cofinality, we can use Hechler's Forcing to force $\mf{c}=\kappa^+$, by ccc $\kappa$ is still a limit and regular, but now, since $\aleph_0<\kappa$, and
 $$2^{\aleph_0}=\mf{c}=\kappa^+>\kappa$$
