@@ -85,7 +85,9 @@ What is so important about being or not atomless? Note that, if $\mu$ has an ato
 $$\widetilde{\mu}(X)=\frac{\mu(A\cap X)}{\mu(A)}$$
 is a $2$-valued measure. We clearly have a correspondence, since every $A$ with positive measure is an atom in a $2$-valued measure. So, in some sense, atoms gives us some sort of generalization of Banach's trivial measure (\ref{eq:banach_trivial_measure}). We will see, however, that such measures are far from being trivial, and, maybe unexpectedly, will be way more fruitful to us than atomless measures!
 
-The reason why atoms are such a big deal is that we can make a correspondence between $\kappa$-complete free ultrafilters on $\kappa$ and $\kappa$-additive non-trivial measures with atoms on $\kappa$, as follows:
+As a matter of comparison, you could ask yourself if atomless measure can be as trivial as $2$-measures; for example, if it could be a $3$-measure. Fortunately, it's a theorem of Sierpiński that, if $\mu$ is atomless, given $X\subseteq S$ and $0\leq\alpha\leq\mu(X)$, there is some set $Y\subseteq X$ such that $\mu(Y)=\alpha$. In other words, $\mu$ attains all possible values it could possibly reach.
+
+So, the reason why atoms are such a big deal is that we can make a correspondence between $\kappa$-complete free ultrafilters on $\kappa$ and $\kappa$-additive non-trivial measures with atoms on $\kappa$, as follows:
 \begin{itemize}
     \item Given an ultrafilter $U$, let $\mu(X)=1$ iff $X\in U$;
     \item Given a measure $\mu$, let $X\in U$ iff $\mu(X)=1$.
@@ -145,28 +147,74 @@ About $\lambda$-additivity implying $\lambda$-completeness, we can also prove th
 
 Let's now prove our first consequence about the existence of atomless measures.
 
-\begin{lemma}{}{atomless1}
-    If there is an atomless measure, then there is also one on some $\kappa\leq\mf{c}$.
-\end{lemma}
+\begin{theorem}{}{atomless}
+    If there is an atomless measure $\mu$, then there is also one on some $\kappa\leq\mf{c}$.
+\end{theorem}
 
 \begin{sketch}
     Let's first sketch this proof, because it's really nice. It makes clear how different atomless measures are and how ``strong'' the $\sigma$-saturation property is.
 
-    Let $\mu$ be such measure on $S$. The fact that it's atomless gives us the following amazing property:
+    Let $\mu$ be such measure on $S$. The fact that it's atomless gives us the following amazing property that resembles disconnectedness:
     $$\text{If $X\subseteq S$, then we can write $X=Y\sqcup Z$, where $\mu(Y),\mu(Z)>0$}$$
     I.e., we can partition any set in subsets of positive measure. Otherwise $X$ would be an atom.
 
-    Now, starting with $S$, partition it in two subsets of positive measure. We can then partition such subsets in other subsets of positive measure. If we keep going on such process, we can construct an infinite binary tree, where in the limit level we take all possible intersections of transversals with positive measure. Let's analyze how it looks like.
+    Now, starting with $S$, we can partition it in subsets of positive measure, and then partition each of these subsets in other subsets of positive measure. If we keep going on such process, we end up with an infinite tree, where in the limit level we take all possible intersections of transversal with positive measure. 
+    
+    There is actually more than one way to construct such tree, we will explicit just one construction, thought. Let's now analyze how such tree looks like.
 
-    Each level of our tree consists of pairwise disjoint sets of positive measure, then, by $\sigma$-saturation, each level has countably many sets. What about the size $\kappa$ of our tree? Let 
-    $$b=\{X_\alpha:\alpha<\lambda\},\text{ with }\lambda<\kappa\text{ and }X_\alpha\text{ a set in the $\alpha$-th level}$$
-    be branch of it. By definition, $\mu(X_{\alpha+1})<\mu(X_\alpha)$, and so $Y_\alpha=X_{\alpha+1}\setminus X_\alpha$ form a family of $\lambda$-many pairwise disjoint sets of positive measure. Again, by $\sigma$-saturation, we have that the size $\kappa$ of our tree is also countable.
+    Each level of our tree consists of pairwise disjoint sets of positive measure, then, by $\sigma$-saturation, each level has countably many sets. What about the size $\gamma$ of our tree? Let 
+    $$b=\{X_\alpha:\alpha<\lambda\},\text{ with }\lambda<\gamma\text{ and }X_\alpha\text{ a set in the $\alpha$-th level}$$
+    be branch of it. By definition, $\mu(X_{\alpha+1})<\mu(X_\alpha)$, and so $Y_\alpha=X_{\alpha+1}\setminus X_\alpha$ form a family of $\lambda$-many pairwise disjoint sets of positive measure. Again, by $\sigma$-saturation, we have that the size of each branch is at most countable, and so the size $\gamma$ of our tree is at most $\aleph_1$.
 
-    Now, look at the limit point of each branch, they all have measure 0, otherwise it wouldn't be the limit point, since we could keep going on our process. And they form a partition of $S$. Finally, since the tree is binary, there are at most $\mf{c}$ of them.
+    Now, look at the limit point of each branch, they all have measure 0, otherwise it wouldn't be the limit point, since we could keep going on our process. They also form a partition of $S$ and, since it's a tree whose branches has countable height, and each level has countably many elements, there are at most $\mf{c}$ of these limit points.
 
-    So we've constructed $\leq\!\mf{c}$-many null sets, whose union is $S$, i.e., our measure isn't $\mf{c}^+$-additive! Then it just remains to induce a measure on $\kappa$.
+    So we've constructed $\leq\!\mf{c}$-many null sets, whose union is $S$, i.e., our measure isn't $\mf{c}^+$-additive! Then it just remains to induce a measure on a smaller cardinal.
 \end{sketch}
 
 \begin{proof}
+    For this first construction we will make some kind of binary tree $T$. Start with $S$ and, if the $\alpha$-th level is already defined, given some set $X$ in it, its immediate successors are the sets $Y$ and $Z$ of positive measure that partition $X$. And when $\alpha$ is a limit ordinal, we get all possible intersections $\bigcap_{\beta<\alpha}X_\beta$ with positive measure, where $X_\beta$ is in the $\beta$-th level.
+
+    If it wasn't clear from the sketch, each branch has countable length in $T$, whose height is at most $\aleph_1$, so we can associate it branch with a countable subset of $T$, i.e., the amount $\kappa$ of branches is st
+    $$\kappa\leq\left\lvert[T]^{\aleph_0}\right\rvert\leq\aleph_1^{\aleph_0}\leq\rp{2^{\aleph_0}}^{\aleph_0}=2^{\aleph_0\cdot\aleph_0}=\mf{c}$$
+    Let then $\{b_\alpha:\alpha<\kappa\}$ be an enumeration of all branches $b_\alpha=\{X_\beta:\beta<\gamma\}$ whose limit point
+    $$Z_\alpha:=\bigcap_{\beta<\gamma}X_\beta$$
+    is nonempty. Then $\{Z_\alpha:\alpha<\kappa\}$ partition $S$ in $\kappa$ sets of measure $0$.
     
+    We then induce a measure $\nu$ on $\kappa$ as follows: Let $f:S\to\kappa$ be defined as
+    $$f(x)=\alpha\iff x\in Z_\alpha$$
+    and let
+    $$\nu(X):=\mu(f^{-1}(X)).$$
+    It's not hard to verify that $\nu$ is in fact a measure on $\kappa$. To see it can't have an atom, assume it has, then $\kappa$ is measurable and, by \cref{th:measurable_inaccessible}, it would be inaccessible. However, you can't have an inaccessible bellow the continuum, otherwise, since $\aleph_0<\kappa\leq2^{\aleph_0}$, then $2^{\aleph_0}<\kappa\leq2^{\aleph_0}$.
 \end{proof}
+
+Clearly we can extend $\nu$ to a measure on $\mf{c}$, just let $\widetilde{\nu}(X)=\nu(X\cap\kappa)$, thus we conclude there is an atomless measure on $\mbb{R}$. It turns out we can, with a slightly modification of the previous argument, obtain a measure on $\mbb{R}$ extending the Lebesgue measure!
+
+Such construction is done by partition the sets in a finer way, where we let $X_\emptyset=S$, and
+$$X_{s\frown0}\sqcup X_{s\frown1}=X_s,\text{ with }\mu(X_{s\frown0})=\mu(X_{s\frown1})=\frac12\mu(X_s)$$
+for every binary sequence $s$. We then let
+$$\widetilde{\lambda}(X)=\mu\rp{\bigcup\{X_s:s\in X\}},\text{ where }X_s=\bigcap_{n\in\omega}X_{s\restriction_n}$$
+with $\mbb{R}$ being identified as the Cantor Space $2^\omega$. The work now is to verify that $\widetilde{\lambda}$ is indeed a measure, and that it agrees with the Lebesgue Measure $\lambda$ on all intervals $[k/2^n,(k+1)/2^n]$, and hence on all Borel sets.
+
+It now remains to show Ulam's main result, that every real-valued measurable cardinal is weakly inaccessible. In order to do this, we will need the following definition:
+
+\begin{definition}{Ulam Matrix}{ulam_matrix}
+    
+\end{definition}
+
+As a summary of all the great work we saw until now, we can state the following theorem:
+
+\begin{theorem}{(Ulam)}{ulam}
+    If there is a measure on some set $S$, then either:
+    \begin{itemize}
+        \item there is a measure with an atom over $S$, and $\lvert S\rvert$ is $\geq$ the least inaccessible cardinal, or;
+        \item there is an atomless measure on $\mf{c}$, making it $\geq$ the least weakly inaccessible cardinal.
+    \end{itemize}
+\end{theorem}
+
+So, the solution for the Set Theoretic Measure Problem is that: we either have a ``trivial'' measure on a monstrously big cardinal we can't even prove to exist in ZFC, or we have a ``non-trivial'' measure on $\mf{c}$, making it also comically big\footnote{how beautiful are god creations}.
+
+\begin{proof}
+    If there is a measure on $S$, then either it's $2$-valued, and then $\lvert S\rvert$ is a measurable cardinal, ...smth... \cref{th:measurable_inaccessible}; or it's atomless and, by \cref{th:atomless}, there is some atomless measure on a $\lambda\leq\mf{c}$. So, if $\kappa$ is the least cardinal with a measure in it, by \cref{lem:measure_implies_kappa_add} we have that $\kappa$ is real-valued measurable and, by \cref{th:real_valued_weakly_inacc}, $\kappa$ is weakly inaccessible, so $\mf{c}\geq\lambda\geq\kappa\geq\kappa_0$ is greater or equal than the least weakly inaccessible cardinal $\kappa_0$.
+\end{proof}
+
+\section{Compacteness}
