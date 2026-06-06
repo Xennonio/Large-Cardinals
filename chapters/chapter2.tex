@@ -195,26 +195,70 @@ for every binary sequence $s$. We then let
 $$\widetilde{\lambda}(X)=\mu\rp{\bigcup\{X_s:s\in X\}},\text{ where }X_s=\bigcap_{n\in\omega}X_{s\restriction_n}$$
 with $\mbb{R}$ being identified as the Cantor Space $2^\omega$. The work now is to verify that $\widetilde{\lambda}$ is indeed a measure, and that it agrees with the Lebesgue Measure $\lambda$ on all intervals $[k/2^n,(k+1)/2^n]$, and hence on all Borel sets.
 
-It now remains to show Ulam's main result, that every real-valued measurable cardinal is weakly inaccessible. In order to do this, we will need the following definition:
+It now remains to show Ulam's main result, that every real-valued measurable cardinal is weakly inaccessible. In order to do this, we will need the following object:
 
 \begin{definition}{Ulam Matrix}{ulam_matrix}
-    
+    For any cardinal $\lambda$, an \lasereye{Ulam $(\lambda^+,\lambda)$-matrix} is a collection $\{A_{\alpha,\eta}:\alpha<\lambda^+,\eta<\lambda\}$
+    of subsets of $\lambda^+$ such that:
+    \begin{itemize}
+        \item $A_{\alpha,\eta}\cap A_{\beta,\eta}=\emptyset$;
+        \item $\lvert\lambda^+\setminus\bigcup_{\eta<\lambda}A_{\alpha,\eta}\rvert\leq\lambda$, for each $\alpha<\lambda^+$.
+    \end{itemize}
 \end{definition}
 
-As a summary of all the great work we saw until now, we can state the following theorem:
+In order to use it, let's guarantee that at least one Ulam $(\lambda^+,\lambda)$-Matrix.
+
+\begin{lemma}{}{ulam_matrix}
+    For any $\lambda$, there is an Ulam $(\lambda^+,\lambda)$-matrix.
+\end{lemma}
+
+\begin{proof}
+    Given $\xi<\lambda^+$, let $f_\xi$ be function on $\lambda$ with $\xi\subseteq\text{Im}(f_\xi)$. Let then define, for $\alpha<\lambda^+$, $\eta<\lambda$,
+    $$\xi\in A_{\alpha,\eta}\iff f_\xi(\eta)=\alpha$$
+    Then, if $\alpha\neq\beta$, clearly $f_\xi(\eta)$ can't be equal both, so $A_{\alpha,\eta}\cap A_{\beta,\eta}=\emptyset$. Now, given $\alpha<\lambda^+$, let $\xi>\alpha$, so, since $\xi\subseteq\text{Im}(f_\xi)$, there is some $\eta<\lambda$ such that $f_\xi(\eta)=\alpha$, i.e., $\xi\in A_{\alpha,\eta}$, therefore
+    $$\xi\in\bigcup_{\eta<\lambda}A_{\alpha,\eta},\text{ for all }\xi>\alpha$$
+    whose complement is contained in $\alpha\leq\lambda$, as desired.
+\end{proof}
+
+Let's see how Ulam Matrices breaks $\sigma$-saturation.
+
+\begin{theorem}{}{real_valued_weakly_inacc}
+    Every real-valued measurable cardinal is weakly inaccessible.
+\end{theorem}
+
+\begin{sketch}
+    Let's do the proof for $\lambda=\omega_1$, showing there can't be a measure on it.
+
+    Intuitively, an Ulam $(\omega_1,\omega)$-matrix is a $\omega_1\times\omega$ matrix whose entries are subsets of $\omega_1$, positioned in such a way that:
+    \begin{itemize}
+        \item any two elements in a column are disjoint;
+        \item the union of all elements in a row contains all, but countably many elements of $\omega_1$.
+    \end{itemize}
+    In fact, this is exactly the combinatorial object we want to break $\sigma$-saturation! Since the union of all elements in a row is $\omega_1$, except for a set of measure zero, then each row has at least one element of positive measure.
+
+    But since we have more columns than rows, then, by the Pigeonhole Principle, there is at least some column with uncountably many disjoint sets of positive measure!
+\end{sketch}
+
+\begin{proof}
+    We already saw that $\kappa$ should be regular, then, assume by a contradiction that $\kappa=\lambda^+$. By the previous theorem there is an Ulam $(\lambda^+,\lambda)$-matrix.
+
+    Since the union of the sets in each row is all of $\lambda^+$, except for a set of measure $0$, then each row has at least one set of positive measure. However, by the Pigeonhole Principle, since there are more rows than columns, we can find a column with uncountably many disjoint sets of positive measure, contradicting $\sigma$-saturation, so $\kappa$ is a limit cardinal, implying it's weakly inaccessible.
+\end{proof}
+
+As a summary of all the nice work we have seen so far, we can state the following theorem:
 
 \begin{theorem}{(Ulam)}{ulam}
-    If there is a measure on some set $S$, then either:
+    If there exists a measure on some set $S$, then either:
     \begin{itemize}
         \item there is a measure with an atom over $S$, and $\lvert S\rvert$ is $\geq$ the least inaccessible cardinal, or;
         \item there is an atomless measure on $\mf{c}$, making it $\geq$ the least weakly inaccessible cardinal.
     \end{itemize}
 \end{theorem}
 
-So, the solution for the Set Theoretic Measure Problem is that: we either have a ``trivial'' measure on a monstrously big cardinal we can't even prove to exist in ZFC, or we have a ``non-trivial'' measure on $\mf{c}$, making it also comically big\footnote{how beautiful are god creations}.
+Therefore, the solution for the Set Theoretic Measure Problem is that: either we have a ``trivial'' measure on a monstrously large cardinal we can't even prove to exist in ZFC, or we have a ``non-trivial'' measure on $\mf{c}$, making it also comically big\footnote{how beautiful are God's creations}.
 
 \begin{proof}
-    If there is a measure on $S$, then either it's $2$-valued, and then $\lvert S\rvert$ is a measurable cardinal, ...smth... \cref{th:measurable_inaccessible}; or it's atomless and, by \cref{th:atomless}, there is some atomless measure on a $\lambda\leq\mf{c}$. So, if $\kappa$ is the least cardinal with a measure in it, by \cref{lem:measure_implies_kappa_add} we have that $\kappa$ is real-valued measurable and, by \cref{th:real_valued_weakly_inacc}, $\kappa$ is weakly inaccessible, so $\mf{c}\geq\lambda\geq\kappa\geq\kappa_0$ is greater or equal than the least weakly inaccessible cardinal $\kappa_0$.
+    If there is a measure on $S$, then either it's $2$-valued, and then if $\kappa\leq\lvert S\rvert$ is the least cardinal with a $2$-valued measure, by \cref{lem:measure_implies_kappa_add} it's measurable, so \cref{th:measurable_inaccessible} guarantees $\kappa$ is inaccessible; or it's atomless and, by \cref{th:atomless}, there is some atomless measure on a $\lambda\leq\mf{c}$. So, if $\kappa$ is the least cardinal with a measure in it, by \cref{lem:measure_implies_kappa_add} we have that $\kappa$ is real-valued measurable and, by \cref{th:real_valued_weakly_inacc}, $\kappa$ is weakly inaccessible, so $\mf{c}\geq\lambda\geq\kappa\geq\kappa_0$ is greater or equal than the least weakly inaccessible cardinal $\kappa_0$.
 \end{proof}
 
 \section{Compacteness}

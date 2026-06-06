@@ -1,6 +1,5 @@
 %% -- Packages --
 \usepackage{amsmath, amsthm, amsfonts, amssymb}
-\usepackage{thmtools}
 \usepackage{mathrsfs}
 \usepackage{cancel}
 \usepackage[margin=3cm]{geometry}
@@ -127,10 +126,10 @@ usepackage("bm");
     colframe=lorelei!80!black,
     coltitle=lorelei!80!black,
     fonttitle=\bfseries,
-    attach title to upper,
+    attach title to upper, 
     after title={:\enskip},
     borderline west={5pt}{0pt}{lorelei},
-    before upper={\setlength{\parskip}{0.3\baselineskip}},
+    parbox=false
 }
 \BeforeBeginEnvironment{sketch}{\savenotes}
 \AfterEndEnvironment{sketch}{\spewnotes}
