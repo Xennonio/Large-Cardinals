@@ -1,22 +1,24 @@
 \chapter{``Small'' Large Cardinals}
 
-There are a lot of ways to motivate the study of Large Cardinals, and we will do it while progressively presenting them, but you can see a great one in my \href{https://github.com/Xennonio/Cofinality}{Cofinality} notes. There I explain how we can come up naturally with the concept of a weakly inaccessible cardinal, and showed some properties of it. Before remembering some of them, let's see a toy model example of what we mean by a Large Cardinal Axiom.
+There are a lot of ways to motivate the study of Large Cardinals, and we will do it while progressively presenting them, but you can see one of them in my \href{https://github.com/Xennonio/Cofinality}{Cofinality} notes. There I explain how we can come up naturally with the concept of a weakly inaccessible cardinal, and showed some properties of it. Before remembering some of them, let's see a toy model example of what we mean by a Large Cardinal Axiom.
 
 As we will see, Large Cardinals are so large that their existence can't be proved in ZFC alone. But what if I told you we already have\footnote{with a lot of poetic license} some kind of large cardinal axiom in ZFC?
 
 Imagine yourself as an ultrafinitist, you don't believe in such things as infinite cardinals, but this doesn't stop you from believing that Set Theory is important. In fact you use set theory a lot! But just as a branch of combinatorics, where everything is purely hereditarily finite.
 
-Hence, the Axiom of Replacement is pointless since, I mean, when does anyone used that? And what can we say about the Axiom of Infinity, other than that it's utter bullshit. So you work in a weaker theory, which we will call FST (short for Finite Set Theory).
+Hence, what can we say about the Axiom of Infinity, other than it's pointless? Or even better, that it's utter bullshit! I mean, when does anyone used that? So you work in a weaker theory, which we will call FST (short for Finite Set Theory).
 
-As we know, $R(\omega)=V_\omega\vDash\mathrm{FST}$, and $\omega\notin V_\omega$, so $\mathrm{FST}$ can't prove there are such things as infinite cardinals. Even more, we have that the existence of such cardinal implies the consistency of FST! So we could say the Axiom of Infinity is some kind of Large Cardinal Axiom, but for ultrafinitist. We will keep this analogy when talking about consistency hierarchy later, so you don't need to keep thinking like an ultrafinitist until there\footnote{fortunetaly, otherwise you wouldn't get past the first page}.
+As we know, $R(\omega)=V_\omega\vDash\mathrm{FST}$, and $\omega\notin V_\omega$, so $\mathrm{FST}$ can't prove there are such things as infinite cardinals. Even more, we have that the existence of such cardinal implies the consistency of FST! So we could say the Axiom of Infinity is some kind of Large Cardinal Axiom, but for ultrafinitist. Even though this was a nice analogy, you don't need to keep thinking like an ultrafinitist for now\footnote{fortunetaly, otherwise you wouldn't get past the first page}.
 
 As a final remark, just to pin down, every time we state a consistency result, like $T\nvdash\varphi$, we're implicitly assuming $\con{T}$, or whatever we need to get rid of the trivial cases. Furthermore, Large Cardinal Axioms will be some sentence of the form $\exists\kappa(\Phi(\kappa))$, which we will denote by $\Phi C$.
 
 \section{Inaccessible Cardinals}
 
+I will treat the following section as a direct continuation of my Cofinality notes. Therefore, any term or reference to any result not explicitly stated here can be consulted \href{https://github.com/Xennonio/Cofinality}{there}.
+
 \subsection{Fixed Point Lemma for Normal Functions}
 
-As we saw, a weakly inaccessible cardinal $\kappa$ is just a uncountable limit regular cardinal. One of its properties is that it's an aleph fixed point, meaning $\aleph_\kappa=\kappa$. However, in my cofinality notes I proved being an aleph fixed point is not too strong, since we can prove there are arbitrarily large aleph fixed points. As promised, I will show here a more general result.
+As we saw, a weakly inaccessible cardinal $\kappa$ is just a uncountable limit regular cardinal. One of its properties is that it's an aleph fixed point, meaning $\aleph_\kappa=\kappa$. However, in my cofinality notes I proved that being an aleph fixed point is not too strong, since we can prove there are arbitrarily large aleph fixed points. As promised, I will show here a more general result.
 
 \begin{definition}{Normal Function}{normal_function}
     A class-function $F:\text{Ord}\to\text{Ord}$ is called \lasereye{normal} if it's both:
@@ -54,7 +56,7 @@ Since $F$ is increasing, $F(\alpha)\geq\alpha$, for any ordinal $\alpha$. But al
 $$F(\kappa)=\sup_{\alpha<\kappa}F(\alpha)\leq \sup_{\alpha<\kappa}\alpha=\kappa$$
 so $F(\kappa)=\kappa$. Then, for example, $\kappa$ would also be a beth fixed point, since we can let $F(\alpha)=\beth_\alpha$.
 
-Also, if $\kappa$ is already a $F$ fixed point, we can let $G$ be an enumeration of the $F$ fixed point, and then $\kappa$ would also be a $G$ fixed point. So for example, if you list all aleph fixed point, $\kappa$ would be as far in the ``line'' of such fixed points as its own size, and you can keep going on such process.
+Also, if $\kappa$ is already a $F$ fixed point, we can let $G$ be an enumeration of the $F$-fixed points, and then $\kappa$ would also be a $G$-fixed point. So for example, if you list all aleph fixed point, $\kappa$ would be as far in the ``line'' of such fixed points as its own size, and you can keep going on such process.
 
 \subsection{Hausdorff's Theorem}\label{subsec:hausdorff}
 
@@ -107,7 +109,7 @@ Note that \ref{eq:zfc_wic} is now a direct corollary of Hausdorff's Theorem and 
     If ZFC proved it, we could define the least inaccessible cardinal $\kappa_0$, and then, by Hausdorff's Theorem, $V_{\kappa_0}\vDash\text{ZFC}$, in particular $V_{\kappa_0}$ also satisfies that there is an inaccessible cardinal $\lambda$, but then $\lambda\in V_{\kappa_0}$, so $\lambda<\kappa_0$, contradicting the minimality of $\kappa_0$.
 \end{proof}
 
-To be fair, the previous proof is not entirely correct, since we didn't justified why $\lambda$ being inaccessible \textit{in} $V_{\kappa_0}$ implies that it's in fact inaccessible. In order to justify that, we need to show the possible counterexamples for $\lambda$ being a cardinal, regular and strong limit, would also be ``seen'' by $V_{\kappa_0}$:
+To be fair, the previous proof is not entirely correct, since we didn't justified why $\lambda$ being inaccessible \textit{in} $V_{\kappa_0}$ implies that it's in fact inaccessible. In order to justify that, we need to show that the possible counterexamples for $\lambda$ being a cardinal, regular and strong limit, would also be ``seen'' by $V_{\kappa_0}$:
 
 \begin{lemma}{}{ic_absolute}
     Working in $\zfc+\ic{\kappa}$, for any $\lambda<\kappa$ we can prove
@@ -115,7 +117,7 @@ To be fair, the previous proof is not entirely correct, since we didn't justifie
 \end{lemma}
 
 \begin{proof}
-    This can be rather tedious if you don't know nothing about absoluteness\footnote{you can learn more about absoluteness in my \href{https://github.com/Xennonio/Consistency-Results}{Consistency Results} notes}, but the idea is that $\ic{\lambda}$ is $\Pi_1$ in nature, implying it's downward absolute under transitive models as $V_\kappa$.
+    This can be rather tedious if you don't know nothing about absoluteness\footnote{you can learn more about absoluteness in my \href{https://github.com/Xennonio/Consistency-Results}{Consistency Results} notes}, but the idea is that $\ic{\lambda}$ is a $\Pi_1$ formula, implying it's downward absolute under transitive models as $V_\kappa$.
 
     For the converse, assume for example that $\lambda$ is not a cardinal, then we can find $f:\alpha\to\lambda$ surjective, with $\alpha<\lambda$. Since $\lambda\in V_\kappa$, then $\lambda\in V_\beta$ for some $\beta<\kappa$, but then, by transitivity, $\alpha\in V_\beta$ too and, therefore, $f\in V_{\beta+3}\subseteq V_\kappa$, so $\lambda$ wouldn't be a cardinal in $V_\kappa$ too.
 
