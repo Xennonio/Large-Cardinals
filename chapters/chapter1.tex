@@ -6,11 +6,11 @@ As we will see, Large Cardinals are so large that their existence can't be prove
 
 Imagine yourself as an ultrafinitist, you don't believe in such things as infinite cardinals, but this doesn't stop you from believing that Set Theory is important. In fact you use set theory a lot! But just as a branch of combinatorics, where everything is purely hereditarily finite.
 
-Hence, what can we say about the Axiom of Infinity, other than it's pointless? Or even better, that it's utter bullshit! I mean, when does anyone used that? So you work in a weaker theory, which we will call FST (short for Finite Set Theory).
+Hence, what can we say about the Axiom of Infinity, other than it's pointless? Or even better, that it's utter bullshit! I mean, when does anyone used that? So you work in a weaker theory: ZFC without the Axiom of Infinity, which we will call FST (short for Finite Set Theory).
 
 As we know, $R(\omega)=V_\omega\vDash\mathrm{FST}$, and $\omega\notin V_\omega$, so $\mathrm{FST}$ can't prove there are such things as infinite cardinals. Even more, we have that the existence of such cardinal implies the consistency of FST! So we could say the Axiom of Infinity is some kind of Large Cardinal Axiom, but for ultrafinitist. Even though this was a nice analogy, you don't need to keep thinking like an ultrafinitist for now\footnote{fortunetaly, otherwise you wouldn't get past the first page}.
 
-As a final remark, just to pin down, every time we state a consistency result, like $T\nvdash\varphi$, we're implicitly assuming $\con{T}$, or whatever we need to get rid of the trivial cases. Furthermore, Large Cardinal Axioms will be some sentence of the form $\exists\kappa(\Phi(\kappa))$, which we will denote by $\Phi C$.
+As a final remark, just to pin down, every time we state a consistency result, like $T\nvdash\varphi$, we're implicitly assuming $\con{T}$, or whatever we need to get rid of the trivial cases. Furthermore, Large Cardinal Axioms will be some sentence of the form $\exists\kappa(\Phi(\kappa))$, which we will denote by $\Phi C$\footnote{and no, $\Phi=\text{ZF}$ is not a Large Cardinal Property that make ZFC into a Large Cardinal Axiom}.
 
 \section{Inaccessible Cardinals}
 
@@ -18,7 +18,7 @@ I will treat the following section as a direct continuation of my Cofinality not
 
 \subsection{Fixed Point Lemma for Normal Functions}
 
-As we saw, a weakly inaccessible cardinal $\kappa$ is just a uncountable limit regular cardinal. One of its properties is that it's an aleph fixed point, meaning $\aleph_\kappa=\kappa$. However, in my cofinality notes I proved that being an aleph fixed point is not too strong, since we can prove there are arbitrarily large aleph fixed points. As promised, I will show here a more general result.
+As stated in my cofinality notes, a weakly inaccessible cardinal $\kappa$ is just a uncountable limit regular cardinal. One of its properties is that it's an aleph fixed point, meaning $\aleph_\kappa=\kappa$. However, in my cofinality notes I proved that being an aleph fixed point is not too strong, since we can prove there are arbitrarily large aleph fixed points. As promised, I will show here the more general result.
 
 \begin{definition}{Normal Function}{normal_function}
     A class-function $F:\text{Ord}\to\text{Ord}$ is called \lasereye{normal} if it's both:
@@ -34,7 +34,7 @@ Then we can prove the following important Lemma
     The class of fixed points of any normal class-function $F$ is unbounded in $\text{Ord}$.
 \end{lemma}
 
-Note then that, since $F(\alpha)=\aleph_\alpha$ is a normal function, such theorem implies there are arbitrarily large aleph fixed points. In fact, the idea of the proof is similar of the one for aleph fixed points.
+Note then that, since $F(\alpha)=\aleph_\alpha$ is a normal function, such theorem implies there are arbitrarily large aleph fixed points. In fact, the idea of the proof is similar to the one for aleph fixed points.
 
 \begin{proof}
     Given an ordinal $\alpha$, we want to let $\beta=\bigcup_{n\in\omega}F^n(\alpha)$, then, since $F$ is increasing, $\beta\geq\alpha$. We now wish to use normality to conclude that
@@ -50,13 +50,13 @@ Note then that, since $F(\alpha)=\aleph_\alpha$ is a normal function, such theor
 
 And, now we have an appropriate nomenclature, note we can prove an inaccessible $\kappa$ is a $F$ fixed point, for some other normal functions $F$:
 
-For example, whenever $F(\alpha)<\kappa$, for any $\alpha<\kappa$.
+For example, whenever $F(\alpha)<\kappa$, for any $\alpha<\kappa$:
 
 Since $F$ is increasing, $F(\alpha)\geq\alpha$, for any ordinal $\alpha$. But also, since $F$ is normal
 $$F(\kappa)=\sup_{\alpha<\kappa}F(\alpha)\leq \sup_{\alpha<\kappa}\alpha=\kappa$$
 so $F(\kappa)=\kappa$. Then, for example, $\kappa$ would also be a beth fixed point, since we can let $F(\alpha)=\beth_\alpha$.
 
-Also, if $\kappa$ is already a $F$ fixed point, we can let $G$ be an enumeration of the $F$-fixed points, and then $\kappa$ would also be a $G$-fixed point. So for example, if you list all aleph fixed point, $\kappa$ would be as far in the ``line'' of such fixed points as its own size, and you can keep going on such process.
+Also, if $\kappa$ is already a $F$ fixed point, we can let $G$ be an enumeration of the $F$-fixed points, and then $\kappa$ would also be a $G$-fixed point. So for example, if you list all aleph fixed point, $\kappa$ would be as far in the ``line'' of such fixed points as its own size, and you can keep going on such process!
 
 \subsection{Hausdorff's Theorem}\label{subsec:hausdorff}
 

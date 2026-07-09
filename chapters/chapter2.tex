@@ -2,6 +2,8 @@
 
 \section{The Measure Problem}
 
+This section will motivate the definition of a Measurable Cardinal and state some equivalences that will be useful in further investigations later on the notes.
+
 \subsection{Set Theoretic Version}
 
 It's a classical problem to seek for a non-constant, translational invariant, $\sigma$-additive probabilistic measure $\mu:\mc{P}(\mbb{R})\to[0,1]$ in the reals $\mbb{R}$. And, as we know, Vitali showed such task is impossible.
@@ -96,7 +98,9 @@ So, the reason why atoms are such a big deal is that we can make a correspondenc
 Which gives rise to the following Large Cardinal Axiom.
 
 \begin{definition}{Measurable Cardinal}{measurable_cardinal}
-    A cardinal $\kappa$ is \lasereye{measurable} if there is a $2$-valued $\kappa$-additive measure on it.
+    A cardinal $\kappa$ is \lasereye{measurable} (denoted $M(\kappa)$) if there is a $2$-valued $\kappa$-additive measure on it.
+
+    Equivalently, $\kappa$ is measurable if there is a $\kappa$-complete free ultrafilter on it.
 \end{definition}
 
 As noted earlier, $\kappa$-additivity implies regularity of $\kappa$. In fact, with atoms we can prove even more!
@@ -131,7 +135,7 @@ It's clear that, if $\mu$ is a $\lambda$-additive measure, then $I_\mu$ is a fre
 $$\mc{F}=\bigcup_{n\geq1}\{X\in\mc{F}:\mu(X)\geq1/n\}$$
 where each term in the RHS is at most finite.
 
-This may seem like a not really powerful remark, but the fact that the ideal of null sets is $\sigma$-saturated is actually really strong! It's the reason why a lot of the following beautiful results work and also why we can relate the Set Theoretic Measure Problem with measures on $\mbb{R}$. In fact, note that $\sigma$-saturation follows solely by the fact that we decided to measure sets with reals\footnote{that's why it's called a real-valued measure, after all. despite $\kappa$-additivity, such generalization is not a completely set-theoretic one, since it relies on measuring as ``humans'' naturally would} in $[0,1]$.
+This may seem like a not really powerful remark, but the fact that the ideal of null sets is $\sigma$-saturated is actually really strong! It's the reason why a lot of the following beautiful results work and also why we can relate the Set Theoretic Measure Problem with measures on $\mbb{R}$. In fact, note that $\sigma$-saturation follows solely by the fact that we decided to measure sets with reals\footnote{that's why it's called a real-valued measure, after all. despite $\kappa$-additivity, one cold argue that such generalization is not a completely set-theoretic one, since it relies on measuring as ``humans'' naturally would} in $[0,1]$.
 
 About $\lambda$-additivity implying $\lambda$-completeness, we can also prove the converse result:
 
@@ -261,4 +265,138 @@ Therefore, the solution for the Set Theoretic Measure Problem is that: either we
     If there is a measure on $S$, then either it's $2$-valued, and then if $\kappa\leq\lvert S\rvert$ is the least cardinal with a $2$-valued measure, by \cref{lem:measure_implies_kappa_add} it's measurable, so \cref{th:measurable_inaccessible} guarantees $\kappa$ is inaccessible; or it's atomless and, by \cref{th:atomless}, there is some atomless measure on a $\lambda\leq\mf{c}$. So, if $\kappa$ is the least cardinal with a measure in it, by \cref{lem:measure_implies_kappa_add} we have that $\kappa$ is real-valued measurable and, by \cref{th:real_valued_weakly_inacc}, $\kappa$ is weakly inaccessible, so $\mf{c}\geq\lambda\geq\kappa\geq\kappa_0$ is greater or equal than the least weakly inaccessible cardinal $\kappa_0$.
 \end{proof}
 
-\section{Compacteness}
+\section{Compactness}
+
+There are actually two natural ways to motivate the study of Compact Cardinals. The first, which we chose as our starting point, comes from the attempt to generalize the first order Compactness Theorem for infinitary logics. And the second comes from the attempt of generalizing Ramsey's Theorem. We will dedicate one section for each, since they're both interesting.
+
+\subsection{Infinitary Logics}
+
+As we said, another natural context where large cardinals appears are in the attempts of generalizing Compactness Theorem. Let's consider the Infinitary Logics $\mc{L}_{\kappa\lambda}$ with $\max\{\kappa,\lambda\}$ many variables and formulas allowing infinite conjunctions $\bigwedge_{\alpha<\eta}$ and disjunction $\bigvee_{\alpha<\eta}$, for any $\eta<\kappa$, and infinite quantifications $\forall_{\alpha<\eta}$ and $\exists_{\alpha<\eta}$, for any $\eta<\lambda$. The satisfaction relation is extended as usual.
+
+In this notation, First Order Logic is just $\mc{L}_{\omega\omega}$, which, as we know, satisfies the Compactness Theorem. In order to generalize Compactness for $\mc{L}_{\kappa\lambda}$, let's first generalize finite satisfiability.
+
+\begin{definition}{$\mu$-satisfiable}{mu_satisfiable}
+    A set $\Phi$ of formulas in $\mc{L}_{\kappa\lambda}$ is \lasereye{$\mu$-satisfiable} if each $\Phi_0\subseteq\Phi$, with $\lvert\Phi_0\rvert<\mu$, is satisfiable.
+\end{definition}
+
+In this notation being finitely satisfiable is just being $\aleph_0$-satisfiable. Let's now generalize the Compactness Theorem for infinitary logics.
+
+\begin{definition}{Weakly and Strongly Compact}{weakly_strongly_compact}
+A cardinal $\kappa$ is \lasereye{weakly compact} (\lasereye{strongly compact}) iff any $\mc{L}_{\kappa\kappa}$-languages $L$ in a signature $S$ (with $\lvert S\rvert\leq\kappa$) satisfies that for every $\Phi\subseteq L^S$, we have that:
+\vspace{-4pt}
+$$\text{if $\Phi$ is $\kappa$-satisfiable, then $\Phi$ is satisfiable.}$$
+\end{definition}
+
+As a warm up, let's look at which properties our compact cardinals have. In fact, since the only tool we have are set of formulas in infinitary languages, many of the following proofs will be based on searching for neat set of formulas, which is a fun task that we strongly encourage you to try on your own first.
+
+\begin{theorem}{}{weakly_compact_inaccessible}
+    Every weakly compact cardinal $\kappa$ is inaccessible.
+\end{theorem}
+
+\begin{proof}
+    Let's start with regularity. Assume by a contradiction that $\kappa=\bigcup X$, for some $X\subseteq\kappa$ with $\lvert X\rvert<\kappa$, and consider $S=\{c_\alpha:\alpha<\kappa\}\cup\{c\}$. Clearly $\lvert S\rvert\leq\kappa$, so we can apply compactness. Let
+    $$\varphi=\bigvee_{\beta\in X}\bigvee_{\alpha<\beta}(c_\alpha=c)$$
+    Since both $\lvert X\rvert,\beta$ are less than $\kappa$, the above disjunction is well-defined. Then, consider
+    $$\Phi=\{c_\alpha\neq c:\alpha<\kappa\}\cup\{\varphi\}$$
+    Now, if $\Phi_0\subseteq\Phi$ has $\lvert\Phi_0\rvert<\kappa$, we can find $\alpha<\kappa$ such that $(c_\alpha\neq c)\notin\Phi_0$, so we just take a model where both $c$ and $c_\alpha$ has the same interpretation, while satisfying $\Phi_0$. Then, by Compacteness we have that $\Phi$ is satisfiable, a contradiction. So $\kappa$ is regular.
+
+    Now, for strong limit, assume by a contradiction that $2^\lambda\geq\kappa$ for some $\lambda<\kappa$. Let
+    $$S=\{c_\alpha:\alpha<\lambda\}\cup\{0,1\},$$
+    we want to express that $c_\alpha$ encodes a function in $2^\lambda$, so let
+    $$\varphi:=\bigwedge_{\alpha<\lambda}(c_\alpha=0\vee c_\alpha=1).$$
+    Now, the contradiction will come from the fact that we will say ``$c_\alpha\neq f$'' for every $f\in2^\lambda$, but still $c_\alpha$ itself will encode a function in $2^\lambda$. To do that consider, for each $f\in2^\lambda$:
+    $$\psi_f:=\bigvee_{\alpha<\vee}(c_\alpha\neq f(\alpha))$$
+    And let $\Phi=\{\varphi,0\neq1,\psi_f:f\in2^\lambda\}$. Now, if $\Phi_0\subseteq\Phi$ is such that $\lvert\Phi_0\rvert<\kappa\leq2^\lambda$, then there is some $f\in2^\lambda$ such that $\psi_f\notin\Phi_0$. Hence, if we let $c_\alpha$ be interpreted as $f$, we will have that $\Phi_0$ is satisfiable. Since $\lvert S\rvert\leq\kappa$, we can then apply compactness and obtain that $\Phi$ is satisfiable.
+
+    However, if $M\vDash\Phi$, we can then define $g:\lambda\to2$ by
+    $$g(\alpha)=\begin{cases}
+        0,\text{ if }M\vDash(c_\alpha=0);\\
+        1,\text{ if }M\vDash(c_\alpha=0).
+    \end{cases}$$
+    But since $\psi_g\in\Phi$, $c_\alpha\neq g(\alpha)$ for some $\alpha<\lambda$, a contradiction.
+\end{proof}
+
+\subsection{Łoś's Theorem for \texorpdfstring{$\mc{L}_{\kappa,\kappa}$}{Lkk}}
+
+
+Now that we know that $\kappa$ being weakly compact ($C_w(\kappa)$), and hence strongly compact ($C_s(\kappa)$), is a Large Cardinal Property, a lot of natural questions arise. However, before diving into them, we need some model theoretic tools, mainly what is called ultraproducts.
+
+In particular, we will ramble a little bit about Łoś's Theorem, which is a well known result on ultraproducts, but we will focus on it's generalization for infinitary logics. The proof is basically the same, but you use the fact we're quotienting by a $\kappa$-complete ultrafilter, which allows us to prove the $\bigwedge$ cases. So, since we're already proving this general version, I will devote this subsection to be a bit wordy on ultraproducts, then fell free to skip if you already know Łoś's Theorem and if you're convinced we can extend the same proof for infinitary logics.
+
+\textcolor{red}{Rambling todo}
+
+\subsection{Relation to Measurables}
+
+With ultraproducts in hands, let's start showing that
+$$C_s(\kappa)\implies M(\kappa),$$
+which can be done using the following characterization of strongly compact cardinals.
+
+\begin{theorem}{(Keisler-Tarski)}{kaisler_tarski}
+    $\kappa$ is strongly compact iff every $\kappa$-complete filter can be extended to a $\kappa$-complete ultrafilter.
+\end{theorem}
+
+The reason why we need strongly compact here is because we will develop a language to talk about filters in $X$, so we will add one constant for each subset of $X$, meaning we will need at least $2^{|X|}$-many, which can eventually be greater than $\kappa$.
+
+Intuitively, the sketch of the proof is to use the magical power of compactness to create a non-standard model with a ``ghostly" element $c$ of $X$ in our language, and then create our ultrafilter as the principal filter at $c$.
+
+\begin{proof}
+    $(\Rightarrow)$ Let $\mc{F}$ be a $\kappa$-complete filter on $X$, let $L$ be the $\mc{L}_{\kappa,\kappa}$-language
+    $$L:=\{\in,c\}\cup\{c_A:A\subseteq X\}$$
+    and let $M$ be the $L$-structure
+    $$M:=(X\cup\mc{P}(X),\in,\{A:A\subseteq X\}).$$
+    Now, to force the existence of a ghostly element $c$ that is inside every $A\subseteq X$ we let
+    $$\Phi:=\mathrm{Th}(M)\cup\{c\in c_A:A\in\mc{F}\}$$
+    then, given any $\Phi_0\subseteq\Phi$ with $\lvert\Phi_0\rvert=\lambda<\kappa$, at most $\lambda$-many $A_\alpha\in\mc{F}$ appears in $\Phi_0$. However, since $\mc{F}$ is $\kappa$-complete, we can let $c$ be interpreted as any element of $\bigcap_{\alpha<\lambda}A_\alpha\in\mc{F}$, so $\Phi_0$ is satisfiable and, therefore, by $\kappa$-compactness we have that $\Phi$ has a model $N$. We then let
+    $$\mc{U}:=\{A\subseteq X:N\vDash(c\in c_A)\}$$
+    and claim $U$ is such ultrafilter.
+
+    In fact, if $A\in\mc{F}$, then $(c\in c_A)\in\Phi$ and, therefore, $N\vDash(c\in c_A)$, i.e., $A\in \mc{U}$ too, so $\mc{U}$ extends $\mc{F}$.
+
+    $U$ is clearly a filter, to see it's an ultrafilter let $A\subseteq X$, then $M\vDash(c\in c_A)\vee(c\in c_{X\setminus A})$, and so $N$ too, meaning either $A\in \mc{U}$ or $X\setminus A\in U$, as desired.
+
+    Lastly, we need to show $\mc{U}$ is $\kappa$-complete, and here is where the fact (not used so far) that we're working in an infinitary language enters. Let $\{A_\alpha\}_{\alpha<\lambda}\subseteq \mc{U}$, with $\lambda<\kappa$, and let
+    $$A:=\bigcap_{\alpha<\lambda}A_\alpha.$$
+    We want to show $c\in A$, and then we need to express infinite intersections in $\mc{L}_{\kappa,\kappa}$. This can be done as follows:
+    $$M\vDash\forall x\left((x\in c_A)\leftrightarrow\bigwedge{\alpha<\lambda}(x\in c_{A_\alpha})\right)$$
+    and since the RHS of $\leftrightarrow$ is satisfied for $x=c$ in $N$, then also is the LHS, i.e., $N\vDash(c\in c_A)$, so
+    $$\bigcap_{\alpha<\lambda}A_\alpha\in \mc{U}$$
+    as desired.
+
+    $(\Leftarrow)$ \textcolor{red}{(Pendente -- Precisa de Los)}
+\end{proof}
+
+We can then prove what we wanted.
+
+\begin{corollary}{(Erdős-Tarski)}{erdos_tarski}
+    Any strongly compact cardinal is measurable.
+\end{corollary}
+
+\begin{proof}
+    The idea is to consider the following filter on $\kappa$:
+    $$\mc{F}=\{A\subseteq\kappa:\lvert\kappa\setminus A\rvert<\kappa\}$$
+    because, given any extension $\mc{U}$ of $\mc{F}$, since $\kappa\setminus\{a\}\in\mc{F}\subseteq\mc{U}$ for any $a\in\kappa$, we can't have $\{a\}\in\mc{U}$. We then only need to guarantee that $\mc{F}$ is $\kappa$-complete and then, by Keisler-Tarski's Theorem we can extend it to a $\kappa$-complete ultrafilter on $\kappa$ and, by \cref{def:measurable_cardinal}, $\kappa$ is measurable.
+
+    In fact, since $\kappa$ is regular, given $\{A_\alpha\}_{\alpha<\lambda}\subseteq\mc{F}$, with $\lambda<\kappa$, we have $\lvert\kappa\setminus A_\alpha\rvert<\kappa$, so, by regularity
+    $$\left\lvert\bigcup_{\alpha<\lambda}(\kappa\setminus A_\alpha)\right\rvert=\left\lvert\kappa\setminus\rp{\bigcap_{\alpha<\lambda} A_\alpha}\right\rvert<\kappa$$
+    meaning $\bigcap_{\alpha<\lambda}A_\alpha\in\mc{F}$, i.e., $\mc{F}$ is $\kappa$-complete.
+\end{proof}
+
+The next natural question is where weakly compact cardinals sit in relation to measurables. This is what the next Theorem, also due to Erdős and Tarski, answers.
+
+\begin{theorem}{(Erdős-Tarski)}{erdos_tarski}
+    Any measurable cardinal is weakly compact.
+\end{theorem}
+
+\begin{proof}
+    \textcolor{red}{Pendent}
+\end{proof}
+
+\subsection{Elementary Submodels Technique}
+
+Maybe surprisingly, there's another, seemly unrelated, approach to compact cardinals which is also very natural. As we did for the previous cardinals\footnote{even though we're talking about the same cardinal as before}, let's keep this motivational presentations of such cardinals and ramble a lit bit about Infinite Ramsey's Theory.
+
+I will assume you at least know the finite version of Ramsey's Theorem in order to motivate the infinite version but, even though you've already heard a lot about it, trust me, there will be plenty of other cools stuffs you probably don't know. Mainly, I will now rant considerably on one of the most interesting proof techniques model theory gave us, called Elementary Submodels Technique, which I will introduce by solving one really hard topology problem, and by giving a combinatorics-free proof of the $\Delta$-system lemma! We will later refine it to prove Erdős-Rado theorem.
+
+
+
+\subsection{Infinite Ramsey's Theory}
