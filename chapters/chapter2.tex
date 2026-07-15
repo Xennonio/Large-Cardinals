@@ -384,6 +384,7 @@ We can then prove what we wanted.
 The next natural question is where weakly compact cardinals sit in relation to measurables. This is what the next Theorem, also due to Erdős and Tarski, answers.
 
 \begin{theorem}{(Erdős-Tarski)}{erdos_tarski}
+
     Any measurable cardinal is weakly compact.
 \end{theorem}
 
@@ -397,6 +398,58 @@ Maybe surprisingly, there's another, seemly unrelated, approach to compact cardi
 
 I will assume you at least know the finite version of Ramsey's Theorem in order to motivate the infinite version but, even though you've already heard a lot about it, trust me, there will be plenty of other cools stuffs you probably don't know. Mainly, I will now rant considerably on one of the most interesting proof techniques model theory gave us, called Elementary Submodels Technique, which I will introduce by solving one really hard topology problem, and by giving a combinatorics-free proof of the $\Delta$-system lemma! We will later refine it to prove Erdős-Rado theorem.
 
+So, as promised, try to ponder about the following general topology problem, which even an undergrad could understand:
 
+\begin{tcolorbox}
+    \textbf{Theorem (Arhangelskii)}. If $X$ is a compact, Hausdorff and first countable space, then
+    $$\lvert X\rvert\leq\mf{c}.$$
+\end{tcolorbox}
 
-\subsection{Infinite Ramsey's Theory}
+This result was proved in 1969 by Arhangelskii, which is pronounced as Arkhangelsky, which answered a question of Aleksandrov that had been open since 1922\footnote{almost half a century!}. The first thing to notice is how cool his name was, Archangel sky, it suits well as a game nickname. The second is that his original proof was rather complicated, but a much simpler one was found by Pol in 1974, whose sketch we will do shortly, but you can read the full proof \href{https://dantopology.wordpress.com/2010/06/12/the-cardinality-of-first-countable-compact-spaces-i/}{here in Dan Ma's Topology Blog}.\footnote{yes, there's a comment from me rambling about Elementary Submodels Technique xD}
+
+\begin{sketch}
+    For each $x\in X$, fix a local basis $\{B_n(x)\}_{n\in\omega}$ at $x$. The main idea is to make a $\omega_1$-steps iteration where we start with any $X_0=\{x_0\}$, with $x_0\in X$ and then let
+    \begin{align*}
+        X_\lambda & = \overline{\bigcup_{\alpha<\lambda}X_\alpha}\text{, for $\lambda$ a limit ordinal};\\
+        X_{\alpha+1} & = \overline{X_\alpha^*\cup X_\alpha},
+    \end{align*}
+    where $X_\alpha^*:=\left\{x_g:g\in[B_\alpha]^{\leq\omega}\text{ and }X_\alpha\subseteq\bigcup g\right\}$, with $x_g$ any point in $X\setminus\bigcup g$, and
+    $$B_\alpha:=\{B_n(x):x\in X_\alpha,\;n\in\omega\}.$$
+    Three things to notice here. First, to see such iteration process is well-defined, we need to assume that $X\setminus\bigcup g\neq\emptyset$ in order to find our $x_g$ (the case it's empty is trivial); second, we will also need that $\lvert X_\alpha\rvert\leq\mf{c}$, for any $\alpha<\omega_1$, which guarantees that our limit stage set
+    $$X^*=\bigcup_{\alpha<\omega_1}X_\alpha,$$
+    which, turns out, is exactly $X$, has cardinality at most $\mf{c}$. I will not prove these two facts here, but they're not that hard, which leads us to our third fact: the hardest part of such proof is to come up with such $\omega_1$-step iteration. Surely the full proof give some light on such choices. For example, the reason why we stop on $\omega_1$ is to guarantee that $X^*$ is closed.
+
+    If $p\in\overline{X^*}$, then there is some sequence $(p_n)$ in $X^*$ converging to $p$. Each $p_n$ is in some stage $X_{\beta(n)}$ and, since we only have countably many points and $\omega_1$ is regular, there is some $\alpha$ such that $\beta(n)<\alpha$, for all $n\in\omega$, so $p_n\in X_\alpha$ and, since it's closed, $p\in X_\alpha$ too, then $p\in X^*$.
+
+    Now, if there was some $q\in X\setminus X^*$, we could find, for each $y\in X^*$, some $n_y\in\omega$ such that $q\notin B_{n_y}(y)$ and, since $\mc{F}=\{B_{n_y}(y):y\in X^*\}$ covers $X^*$ (which is compact, since it's closed), we can extract a finite subcover $\mc{F}_0=\{B_{n_1}(y_1),\dots,B_{n_k}(y_k)\}$ and each $y_i$ is in some level $X_\alpha$. However, looking at level $X_{\alpha+1}$, we know $\mc{F}\subseteq B_\alpha$ covers $X_\alpha$ (since it covers $X^*$) and $X\setminus\bigcup g\neq\emptyset$ (since $q\in X\setminus\bigcup g$). However, by definition we could find $x_g\in X\setminus\bigcup g$ such that $x_g\in X_{\alpha+1}\subseteq X^*$, contradicting that $\bigcup g$ covers $X^*$.
+\end{sketch}
+
+Now, two things to point. First, is that we could weaken the condition that $X$ is compact to $X$ being Lindelöf, the argument would be exactly the same, except that we would extract a countable subcover $\mc{F}_0$ which would also be in some level $X_\alpha$, again by regularity of $\omega_1$. Second, even knowing the full argument it's hard to backtrack which iteration process we should do to make the proof work, it comes as no surprise that such easier proof was only founded more than half a century later the problem was stated.
+
+Let's now see the idea behind the main technique that will solve such problem. The advantage is that, in the words of Kunen, ``a person familiar with such technique would write down the first paragraph\footnote{it will become clear what is this ``first paragraph''} of the proof without even thinking. It's then not hard to come up with the details to complete the proof.'' as we will see.
+
+The motivation comes from one of the most common proofs of Löwenheim-Skolem Theorem, you can see my full rant and proof of it in\footnote{as always} my \href{https://github.com/Xennonio/Consistency-Results}{Consistency Results notes}, in subsection ``Digression About Löwenheim-Skolem''. But, just to remember, the idea is, for each satisfiable existential formula $\varphi$, we consider its Skolem function $f_\varphi$ that associates a witness for the formula, and then we close some set $S$ for all those functions. Now, since we only have countably many formulas\footnote{at least for countable languages, as ZFC}, the set $\overline{S}$ we will obtain will have the same cardinality as $S$.
+
+In order to use it in a lot of different contexts we will start with some level $H(\theta)$ of the cumulative hierarchy of the hereditarily-$\theta$ sets and use LST to find an $M\preccurlyeq H(\theta)$. There's no specific reason to use $H(\theta)$ itself, in fact, by Reflection Theorem we could use any other cumulative hierarchy, the only thing we want is to reflect as finitely many axioms as we need from ZFC, so we take $H(\theta)$ since we already know $H(\theta)\vDash\mathrm{ZFC}-\mc{P}$, for $\theta$ any regular uncountable cardinal, and then we just need to let $\theta$ be large enough such to contain whatever power sets we're interested in.
+
+It's worth noting that, although $M$ is usually not transitive, we have the following property, which will be strengthened later, but with a price.
+
+\begin{lemma}{}{transitive_M_Htheta}
+    Let $M\preccurlyeq H(\theta)$, with $\theta\geq\aleph_1$. For any countable $R$, if $R\in M$, then $R\subseteq M$ and, for any finite $R$, if $R\subseteq M$, then $R\in M$.
+\end{lemma}
+
+\begin{proof}
+    \textcolor{red}{Pendent}
+\end{proof}
+
+To illustrate such method, let's reprove the $\Delta$-System Lemma\footnote{you can see a different proof of it using Fodor's Lemma in my Cofinality notes}. Since we want to first understand this technique, let's prove its simplest version, and later we will sketch how to prove $\Delta$-System in its full generality.
+
+\begin{theorem}{$\Delta$-System Lemma}{delta_system_lemma}
+    If $\mc{A}$ is an uncountable family of finite sets, then there is a set $R$ and an uncountable $\mc{B}\subseteq\mc{A}$ such that $\mc{B}$ forms a $\Delta$-system with root $R$.
+\end{theorem}
+
+\begin{proof}
+    \textcolor{red}{Pendent}
+\end{proof}
+
+\subsection{Infinite Ramsey Theory}
