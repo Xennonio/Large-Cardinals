@@ -8,13 +8,13 @@ This section will motivate the definition of a Measurable Cardinal and state som
 
 It's a classical problem to seek for a non-constant, translational invariant, $\sigma$-additive probabilistic measure $\mu:\mc{P}(\mbb{R})\to[0,1]$ in the reals $\mbb{R}$. And, as we know, Vitali showed such task is impossible.
 
-The construction is rather simple for a modern set theorist, consider the real numbers modulo a rational, $\mbb{R}/\mbb{Q}$, and let $V$ be a transversal in $[0,1]$. We will show
+The construction is rather simple for a modern set theorist. Consider the real numbers modulo a rational, $\mbb{R}/\mbb{Q}$, and let $V$ be a transversal in $[0,1]$. We will show
 $$[0,1]\subseteq\bigcup_{q\in[-1,1]\cap\mbb{Q}}V+q\subseteq[-1,2].$$
-Since $V\subseteq[0,1]$, the second inclusion is clear. For the first let $r\in[0,1]$, then by definition of $V$ we can find $v\in[r]\cap V$, so $r-v\in[-1,1]\cap\mbb{Q}$, and then $r=v+(r-v)\in V+(r-v)$. So
+Since $V\subseteq[0,1]$, the second inclusion is clear. For the first let $r\in[0,1]$, then by definition of $V$ we can find $v\in[r]\cap V$, so $r-v\in[-1,1]\cap\mbb{Q}$, and then $r=v+(r-v)\in V+(r-v)$. Therefore
 $$0<\mu([0,1])\leq\sum_{n}\mu(V)\leq\mu([-1,2])<1$$
 which is impossible for any value $\mu(V)$ could assume.
 
-From here, there are two possible paths. Measure theory lead the one weakening the domain of $\mu$, i.e., considering the measure only for the sets in a $\sigma$-algebra of $\mbb{R}$. Set theory lead the other where the geometrical condition of translational invariance is weakened.
+From here, there are two possible paths. Measure theory leads the one weakening the domain of $\mu$, i.e., considering the measure only for the sets in a $\sigma$-algebra of $\mbb{R}$. Set theory leads the other where the geometrical condition of translational invariance is weakened.
 
 Banach showed that, without translational invariance, we could find trivial measures $\mu_r$ on any set $S$, with $r\in S$, as follows:
 \begin{equation}\label{eq:banach_trivial_measure}
@@ -400,10 +400,9 @@ I will assume you at least know the finite version of Ramsey's Theorem in order 
 
 So, as promised, try to ponder about the following general topology problem, which even an undergrad could understand:
 
-\begin{tcolorbox}
-    \textbf{Theorem (Arhangelskii)}. If $X$ is a compact, Hausdorff and first countable space, then
-    $$\lvert X\rvert\leq\mf{c}.$$
-\end{tcolorbox}
+\begin{theorem}{(Arhangelskii)}{arhangelskii}
+    If $X$ is a compact, Hausdorff and first countable space, then $\lvert X\rvert\leq\mf{c}$.
+\end{theorem}
 
 This result was proved in 1969 by Arhangelskii, which is pronounced as Arkhangelsky, which answered a question of Aleksandrov that had been open since 1922\footnote{almost half a century!}. The first thing to notice is how cool his name was, Archangel sky, it suits well as a game nickname. The second is that his original proof was rather complicated, but a much simpler one was found by Pol in 1974, whose sketch we will do shortly, but you can read the full proof \href{https://dantopology.wordpress.com/2010/06/12/the-cardinality-of-first-countable-compact-spaces-i/}{here in Dan Ma's Topology Blog}.\footnote{yes, there's a comment from me rambling about Elementary Submodels Technique xD}
 
@@ -435,11 +434,19 @@ In order to use it in a lot of different contexts we will start with some level 
 It's worth noting that, although $M$ is usually not transitive, we have the following property, which will be strengthened later, but with a price.
 
 \begin{lemma}{}{transitive_M_Htheta}
-    Let $M\preccurlyeq H(\theta)$, with $\theta\geq\aleph_1$. For any countable $R$, if $R\in M$, then $R\subseteq M$ and, for any finite $R$, if $R\subseteq M$, then $R\in M$.
+    Let $M\preccurlyeq H(\theta)$, with $\theta\geq\aleph_1$, then:
+    \begin{enumerate}
+        \item for any countable $R$, if $R\in M$, then $R\subseteq M$ and;
+        \item for any finite $R$, if $R\subseteq M$, then $R\in M$.
+    \end{enumerate}
 \end{lemma}
 
 \begin{proof}
-    \textcolor{red}{Pendent}
+    (1) Notice first that, since $\omega$ and each $n\in\omega$ are definable and absolute, and $\theta$ is uncountable, then $H(\theta)$ satisfies that they exist, in particular $M$ will too, and we will have that $\omega\in M$ and $\omega\subseteq M$. Now, since $R$ is countable, there is some surjection $f:\omega\to R$ and, since $R,\omega\in H(\theta)$, it's not hard to see that each $f\in H(\theta)$ too (just look at the transitive closure of $\omega\times R$).
+
+    This means $H(\theta)$ satisfies that $R$ is countable, and then $M$ too, meaning we have some $f:\omega\to R$ in $M$ witnessing its countability. And then we have that, since $f,n\in M$, then $f(n)\in M$, for each $n\in\omega$, so $a\subseteq M$, as desired.
+
+    (2) Let $R=\{a_1,\dots,a_n\}$, since $M\preceq H(\theta)$, and $H(\theta)$ satisfies the formula saying that there is exactly one set with elements $a_1$ through $a_n$ (whose parameters are in $M$), then $M$ also does, and such set is necessarily $R$, so $R\in M$.
 \end{proof}
 
 To illustrate such method, let's reprove the $\Delta$-System Lemma\footnote{you can see a different proof of it using Fodor's Lemma in my Cofinality notes}. Since we want to first understand this technique, let's prove its simplest version, and later we will sketch how to prove $\Delta$-System in its full generality.
@@ -448,8 +455,23 @@ To illustrate such method, let's reprove the $\Delta$-System Lemma\footnote{you 
     If $\mc{A}$ is an uncountable family of finite sets, then there is a set $R$ and an uncountable $\mc{B}\subseteq\mc{A}$ such that $\mc{B}$ forms a $\Delta$-system with root $R$.
 \end{theorem}
 
+You can follow the proof visually with Figure \ref{fig:e_submodel}.
+
 \begin{proof}
-    \textcolor{red}{Pendent}
+    First of all, it's not hard to show using Zorn's Lemma that, for any finite set $R$, there is some $\subseteq$-maximal set $\mc{B}\subseteq\mc{A}$ that forms a $\Delta$-system with root $R$. Let $\varphi(\mc{B},R)$ be the first order formula expressing it. Now, let $\theta$ be an uncountable regular cardinal large enough such that $\mc{A}\in H(\theta)$ and the entire argument below can be carried out within $H(\theta)$:
+
+    Fix a countable $M\preceq H(\theta)$ with $\mc{A}\in M$. We can then fix some $X_0\in\mc{A}\setminus M$ and let $R:=X_0\cap M$. Since $R\subseteq M$ and $R$ is finite, by \cref{lem:transitive_M_Htheta} we have that $R\in M$. Now, if every $\mc{B}$ satisfying $\varphi(\mc{B},R)$ were already uncountable, we would be done, so let us assume there is some countable $\mc{B}$ satisfying it. Since this is true in $H(\theta)$, we can also fix some countable $\mc{B}\in M$ which, by \cref{lem:transitive_M_Htheta}, is a subset of $M$. Since $R$ is a root for $\mc{B}$, then $R\subseteq B$ for any $B\in\mc{B}$.
+    
+    Finally, let $\mc{C}=\mc{B}\cup\{X_0\}$, then, since $\mc{B}\subseteq M$ and $X_0\notin M$, we have $\mc{B}\subsetneq\mc{C}$. However, for each $B\in\mc{B}$, since $\mc{B}\subseteq\mc{A}$ we have $B$ finite, so $B\in M$ implies (again, by \cref{lem:transitive_M_Htheta}) that $B\subseteq M$, then
+    $$R\subseteq X_0\cap B\subseteq X_0\cap M=R$$
+    i.e., $\mc{C}$ is a $\Delta$-system with root $R$, contradicting the $\subseteq$-maximality of $\mc{B}$.
 \end{proof}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.5]{e_submodel.png}
+\caption{Elementary Submodel (not to scale) -- Photo Prototype}
+\label{fig:e_submodel}
+\end{figure}
 
 \subsection{Infinite Ramsey Theory}
